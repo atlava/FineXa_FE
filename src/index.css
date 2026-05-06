@@ -1,27 +1,22 @@
-*  {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-body {
-  font-family: 'Poppins', sans-serif; /* Ganti nama font di sini juga */
-  background-color: #ffffff;
-  color: #333333;
-}
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat', sans-serif;
-}
+@layer base {
+  body {
+    /* Pakai font Poppins untuk semua teks di body */
+    font-family: 'Poppins', sans-serif;
+    @apply antialiased text-gray-800;
+  }
 
-/* index.css */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  h1, h2, h3, h4, h5, h6 {
+    /* Pakai font Montserrat khusus untuk judul */
+    font-family: 'Montserrat', sans-serif;
+    @apply font-bold;
+  }
 
-body {
-  font-family: sans-serif; /* Nanti kita ganti pakai font dari Figma */
-  background-color: #ffffff;
-  color: #333333; /* Biar default teks warnanya gelap, bukan putih */
+  /* Paksa input dan button biar nggak pakai font bawaan browser */
+  input, button, textarea, select {
+    font-family: inherit;
+  }
 }
