@@ -4,7 +4,6 @@ const Dashboard = () => {
       nama: "Deposito", 
       deskripsi: "Investasi aman dengan bunga tetap", 
       risiko: "Rendah", 
-      returnVal: "3-5% p.a",
       rekomendasi: false,
       icon: "🛡️"
     },
@@ -12,7 +11,6 @@ const Dashboard = () => {
       nama: "Reksadana Pasar Uang", 
       deskripsi: "Likuiditas tinggi, risiko minimal", 
       risiko: "Rendah", 
-      returnVal: "4-6% p.a",
       rekomendasi: false,
       icon: "📊"
     },
@@ -20,7 +18,6 @@ const Dashboard = () => {
       nama: "Reksadana Campuran", 
       deskripsi: "Kombinasi saham dan obligasi", 
       risiko: "Sedang", 
-      returnVal: "8-12% p.a",
       rekomendasi: true,
       icon: "🥧"
     },
@@ -28,7 +25,6 @@ const Dashboard = () => {
       nama: "Reksadana Saham", 
       deskripsi: "Potensi return lebih tinggi", 
       risiko: "Sedang", 
-      returnVal: "10-15% p.a",
       rekomendasi: true,
       icon: "📈"
     },
@@ -36,7 +32,6 @@ const Dashboard = () => {
       nama: "Saham", 
       deskripsi: "Potensi keuntungan maksimal", 
       risiko: "Tinggi", 
-      returnVal: "15-30% p.a",
       rekomendasi: false,
       icon: "📉"
     },
@@ -44,7 +39,6 @@ const Dashboard = () => {
       nama: "Kripto", 
       deskripsi: "Volatilitas sangat tinggi", 
       risiko: "Tinggi", 
-      returnVal: "Variatif",
       rekomendasi: false,
       icon: "✨"
     },
@@ -108,7 +102,6 @@ const Dashboard = () => {
                   <p className="text-sm font-bold text-gray-800">{item.risiko}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-[10px] text-gray-400 uppercase font-semibold mb-1">Return</p>
                   <p className={`text-sm font-bold ${item.returnVal === 'Variatif' ? 'text-[#51BA55]' : 'text-[#51BA55]'}`}>
                     {item.returnVal}
                   </p>
