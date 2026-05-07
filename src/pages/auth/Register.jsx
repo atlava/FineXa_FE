@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Register = () => {
+  const navigate = useNavigate();
   return (
-    // Container utama: Atas-bawah di HP, Kiri-kanan di Desktop (md:flex-row)
+    // Container utama
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
       
       {/* Bagian Kiri: Visual Hijau (Sesuai Figma) */}
@@ -26,12 +27,12 @@ const Login = () => {
           
           {/* Judul Utama */}
           <h1 className="text-4xl md:text-[42px] font-bold leading-[1.2] mb-5">
-            Platform Investasi<br/>Terpercaya untuk<br/>Masa Depan
+            Mulai Investasi<br/>Anda Hari Ini
           </h1>
           
           {/* Sub-judul */}
           <p className="text-sm md:text-base text-white/80 mb-14 max-w-md font-light leading-relaxed">
-            Rekomendasi investasi yang dipersonalisasi berdasarkan profil risiko dan tujuan finansial Anda.
+            Bergabung dengan ribuan investor yang sudah mempercayai FineXa untuk panduan investasi mereka.
           </p>
 
           {/* Statistik (3 Kolom) */}
@@ -51,8 +52,8 @@ const Login = () => {
             {/* Stat 3 */}
             <div className="flex flex-col">
               {/* Note: Di gambar figma pakai logo Rupee (₹), aku samain aja. Kalau mau diganti Rp tinggal ganti */}
-              <span className="text-2xl md:text-[28px] font-bold mb-1">₹150B+</span>
-              <span className="text-xs md:text-sm text-white/80 font-light leading-tight">Assets Under<br/>Management</span>
+              <span className="text-2xl md:text-[28px] font-bold mb-1">24/7</span>
+              <span className="text-xs md:text-sm text-white/80 font-light leading-tight">Customer Support</span>
             </div>
           </div>
 
@@ -60,15 +61,24 @@ const Login = () => {
       </div>
 
       {/* Bagian Kanan: Formulir Putih */}
-      <div className="w-full md:w-1/2 flex items-start md:items-center justify-center p-6 md:p-16 -mt-10 md:mt-0 z-10">
+      <div className="w-full md:w-1/2 flex items-start md:items-center justify-center p-6 md:p-12 -mt-10 md:mt-0 z-10">
         
-        {/* Kotak Form */}
         <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">Masuk</h2>
-          <p className="text-sm text-gray-500 mb-6">Silakan masukkan email dan password Anda</p>
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">Buat Akun</h2>
+          <p className="text-sm text-gray-500 mb-6">Lengkapi data di bawah untuk mulai berinvestasi</p>
           
           <form className="flex flex-col gap-4">
             
+            {/* Input Nama Lengkap */}
+            <div className="flex flex-col">
+              <label className="text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
+              <input 
+                type="text" 
+                placeholder="Masukkan nama lengkap" 
+                className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-finexa focus:ring-2 focus:ring-finexa/20 transition-all"
+              />
+            </div>
+
             {/* Input Email */}
             <div className="flex flex-col">
               <label className="text-sm font-medium text-gray-700 mb-1">Alamat Email</label>
@@ -87,32 +97,46 @@ const Login = () => {
                 placeholder="••••••••" 
                 className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-finexa focus:ring-2 focus:ring-finexa/20 transition-all"
               />
+              <p className="text-xs text-gray-500 mt-1.5 ml-1">
+                *Minimal 6 karakter, wajib mengandung huruf kapital, huruf kecil, angka, dan simbol (!@#$%^&*)
+              </p>
             </div>
 
-            {/* Lupa Password */}
-            <div className="text-right mt-1">
-              <div className="flex items-center gap-2">
-                <input type="checkbox" id="remember" className="h-4 w-4 text-finexa border-gray-300 rounded focus:ring-finexaa accent-finexa cursor-pointer" />
-                <label htmlFor="remember" className="text-sm text-gray-600 cursor-pointer">Ingat Saya</label>              
-                <Link to="/lupa-password" className="text-sm font-medium text-finexa hover:text-finexaDark hover:underline transition-all ml-auto">
-                Lupa Password?
+            {/* Input Konfirmasi Password */}
+            <div className="flex flex-col">
+              <label className="text-sm font-medium text-gray-700 mb-1">Konfirmasi Password</label>
+              <input 
+                type="password" 
+                placeholder="••••••••" 
+                className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-finexa focus:ring-2 focus:ring-finexa/20 transition-all"
+              />
+            </div>
+
+            {/* Checkbox Syarat & Ketentuan */}
+            <div className="flex items-center gap-2">
+              <input type="checkbox" id="terms" className="h-4 w-4 text-finexa border-gray-300 rounded focus:ring-finexa accent-finexa cursor-pointer" />
+              <label htmlFor="terms" className="text-sm text-gray-600 cursor-pointer">
+                Saya setuju dengan 
+                <Link to="/terms" className="font-medium text-finexa hover:text-finexaDark hover:underline mx-1 transition-all">
+                  Syarat & Ketentuan
                 </Link>
-            </div>
-            </div>
+              </label>
+            </div>  
 
-            {/* Tombol Masuk */}
+            {/* Tombol Daftar */}
             <button 
               type="button" 
+              onClick={(e) => {e.preventDefault(); navigate('/kuisioner');}}
               className="bg-finexa text-white font-semibold rounded-lg p-3 mt-4 hover:bg-finexaDark hover:-translate-y-0.5 shadow-md hover:shadow-lg transition-all duration-300"
             >
-              Masuk ke Dashboard
+              Daftar Sekarang
             </button>
 
-            {/* Link Daftar */}
+            {/* Link Masuk */}
             <div className="text-center mt-4 text-sm text-gray-500">
-              Belum punya akun? 
-              <Link to="/register" className="font-semibold text-finexa hover:text-finexaDark hover:underline ml-1 transition-all">
-                Daftar di sini
+              Sudah punya akun? 
+              <Link to="/login" className="font-semibold text-finexa hover:text-finexaDark hover:underline ml-1 transition-all">
+                Masuk di sini
               </Link>
             </div>
 
@@ -124,4 +148,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
