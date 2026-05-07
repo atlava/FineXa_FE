@@ -40,7 +40,7 @@ const Kuisioner = () => {
 
   const handleNext = () => {
     if (answers[currentStep] === null) {
-      alert("Pilih salah satu jawaban dulu ya, lek!");
+      alert("Pilih salah satu jawaban dulu ya!");
       return;
     }
     if (currentStep < questions.length - 1) {

@@ -4,10 +4,30 @@ const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState(0); 
 
   const faqData = [
-    { q: "Apa itu FineXa?", a: "FineXa adalah platform cerdas yang membantu Anda menganalisis profil risiko dan memberikan rekomendasi investasi yang dipersonalisasi sesuai tujuan finansial Anda." },
-    { q: "Apakah data saya aman di platform ini?", a: "Sangat aman. Kami menggunakan sistem enkripsi standar industri dan tidak akan pernah membagikan data pribadi Anda kepada pihak ketiga tanpa izin eksplisit." },
-    { q: "Bagaimana cara mengubah profil risiko saya?", a: "Anda dapat mengambil ulang kuesioner profil risiko melalui halaman Profil kapan saja jika ada perubahan dalam tujuan atau kondisi finansial Anda." },
-    { q: "Apakah layanan analisis ini berbayar?", a: "Untuk fitur pembuatan akun dan analisis profil risiko dasar, FineXa sepenuhnya gratis." }
+    { 
+      q: "Apa itu FineXa?", 
+      a: "FineXa adalah platform layanan konsultasi rekomendasi investasi mandiri yang dirancang untuk membantu investor dalam membuat keputusan investasi yang lebih cerdas dan berdasarkan data. Melalui pendekatan berbasis teknologi, FineXa menyediakan analisis mendalam terhadap berbagai instrumen investasi, mulai dari saham, obligasi, hingga reksa dana, yang disesuaikan dengan profil risiko dan tujuan keuangan setiap individu. Dengan fitur-fitur inovatifnya, FineXa menjadi mitra terpercaya bagi investor pemula maupun berpengalaman untuk mengelola portofolio investasi mereka dengan lebih efisien dan terarah menuju kemandirian finansial." 
+    },
+    { 
+      q: "Bagaimana sistem rekomendasi investasi FineXa bekerja?", 
+      a: "Sistem rekomendasi investasi FineXa beroperasi dengan menggunakan algoritma canggih yang dirancang khusus untuk memadukan berbagai data pasar keuangan terkini, analisis fundamental perusahaan, serta tren ekonomi makro secara real-time. Melalui pemrosesan data yang mendalam, sistem ini mampu menyaring ribuan instrumen investasi untuk memberikan saran yang paling relevan dengan profil risiko dan tujuan keuangan pengguna. Selain itu, sistem FineXa juga bersifat dinamis, secara berkala memperbarui rekomendasinya seiring dengan perubahan kondisi pasar dan perkembangan teknologi keuangan terkini." 
+    },
+    { 
+      q: "Apa saja yang dipelajari di Edukasi Investasi FineXa?", 
+      a: "Belajar investasi kini lebih mudah melalui Edukasi Investasi FineXa. Dapatkan akses ke berbagai materi pembelajaran yang informatif mulai dari konsep dasar investasi hingga strategi pengelolaan portofolio yang lebih canggih. Melalui artikel, video edukatif, dan webinar interaktif, FineXa berkomitmen untuk meningkatkan literasi keuangan pengguna agar dapat mengambil keputusan investasi yang lebih bijak dan terinformasi." 
+    },
+    { 
+      q: "Apa itu Profil Risiko?", 
+      a: "Profil risiko adalah gambaran kemampuan dan kesediaan seseorang dalam menghadapi risiko fluktuasi nilai investasi. Setiap orang memiliki toleransi risiko yang berbeda-beda, mulai dari yang sangat konservatif hingga sangat agresif. Dengan memahami profil risiko kamu, FineXa dapat memberikan rekomendasi produk investasi yang paling sesuai agar perjalanan investasimu terasa lebih nyaman dan terarah sesuai dengan tujuan keuangan jangka panjang." 
+    },
+    {
+      q: "Bagaimana perlindungan data pengguna di FineXa?",
+      a: "Keamanan data pengguna adalah prioritas utama kami di FineXa. Kami mengimplementasikan standar keamanan teknologi informasi terkini guna melindungi informasi pribadi dan finansial kamu dari akses yang tidak sah. Melalui penggunaan enkripsi tingkat tinggi dan sistem pemantauan yang ketat, kami berupaya memastikan seluruh data pengguna tersimpan dengan aman dan tetap terjaga kerahasiaannya sesuai dengan regulasi perlindungan data yang berlaku. "
+    },
+    {
+      q: "Memahami Risiko Investasi",
+      a: "Berinvestasi selalu memiliki risiko, namun dengan pemahaman yang tepat, risiko tersebut dapat dikelola dengan bijak. Setiap instrumen investasi memiliki karakteristik risiko yang berbeda-beda, seperti risiko pasar, risiko likuiditas, hingga risiko kredit. FineXa membantu pengguna untuk mengenali berbagai jenis risiko ini melalui analisis data yang transparan sehingga kamu dapat mengambil langkah investasi yang lebih terencana dan sesuai dengan batas toleransi risikomu."
+    },
   ];
 
   return (
@@ -15,7 +35,7 @@ const FAQ = () => {
       
       {/* Header Teks */}
       <div className="text-center mb-8 md:mb-10">
-        <h1 className="text-2xl md:text-4xl font-bold text-gray-800 mb-3">Pusat Bantuan & FAQ</h1>
+        <h1 className="text-2xl md:text-4xl font-bold text-gray-800 mb-3">Frequently Ask Question</h1>
         <p className="text-gray-500 font-light text-sm md:text-base px-4">
           Ada pertanyaan seputar FineXa? Temukan jawabannya di bawah ini.
         </p>
@@ -44,9 +64,9 @@ const FAQ = () => {
             </button>
             
             <div 
-              className={`px-5 md:px-6 overflow-hidden transition-all duration-300 ease-in-out ${activeIndex === index ? 'max-h-40 pb-5 opacity-100' : 'max-h-0 opacity-0'}`}
+              className={`px-5 md:px-6 overflow-hidden transition-all duration-500 ease-in-out ${activeIndex === index ? 'max-h-[500] pb-6 md:pb-8 opacity-100' : 'max-h-0 opacity-0'}`}
             >
-              <p className="text-gray-600 text-xs md:text-sm font-light leading-relaxed border-t border-gray-100 pt-3 md:pt-4 mt-1">
+              <p className="text-gray-500 text-sm md:text-base font-light leading-relaxed text-justify border-t border-gray-100 pt-4 md:pt-6 mt-1">
                 {item.a}
               </p>
             </div>
