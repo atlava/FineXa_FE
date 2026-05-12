@@ -8,6 +8,13 @@ import KeluarIconImg from '/images/Keluar.svg';
 const UserLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const handleLogout = () => {
+    // 1. Buang Token (KTP) dari ingatan browser
+    localStorage.removeItem('token');
+    
+    // 2. Tendang user balik ke halaman Login
+    navigate('/login');
+  };
 
   return (
     <div className="flex min-h-screen bg-[#F8F9FA] pt-16 pb-20 md:pt-0 md:pb-0">
@@ -20,7 +27,7 @@ const UserLayout = () => {
           </div>
           <span className="text-xl font-bold text-gray-800">FineXa</span>
         </div>
-        <button onClick={() => navigate('/login')} className="text-sm font-medium text-red-500">Keluar</button>
+        <button onClick={handleLogout} className="text-sm font-medium text-red-500">Keluar</button>
       </div>
 
       {/* 2. SIDEBAR (DESKTOP) */}
@@ -48,7 +55,7 @@ const UserLayout = () => {
           </Link>
 
           <Link to="/faq" className={`flex items-center gap-3 p-3 rounded-xl transition-all ${location.pathname === '/faq' ? 'bg-green-50 text-[#51BA55] font-semibold' : 'text-gray-500 hover:bg-gray-50'}`} >
-            <img src="/images/Profil.svg" alt="Profil" className="w-6 h-6" />
+            <img src="/images/Faq.svg" alt="Profil" className="w-6 h-6" />
             <span className="text-base">FAQ</span>
           </Link>
 
@@ -57,7 +64,7 @@ const UserLayout = () => {
           <p className="text-xs opacity-80 mb-1 font-light">Tipe Investasi</p>
           <p className="text-sm font-semibold leading-tight text-white">Diversifikasi aset sangat disarankan.</p>
         </div>
-        <button onClick={() => navigate('/login')} className="flex items-center gap-3 p-3 text-red-500 font-medium hover:bg-red-50 rounded-xl transition-all mt-auto">
+        <button onClick={handleLogout} className="flex items-center gap-3 p-3 text-red-500 font-medium hover:bg-red-50 rounded-xl transition-all mt-auto">
           <img src="/images/Keluar.svg" alt="Keluar" className="w-6 h-6" />
           <span className="text-base">Keluar</span>
         </button>
