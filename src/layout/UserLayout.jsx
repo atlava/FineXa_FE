@@ -48,7 +48,7 @@ const UserLayout = () => {
           </Link>
 
           <Link to="/faq" className={`flex items-center gap-3 p-3 rounded-xl transition-all ${location.pathname === '/faq' ? 'bg-green-50 text-[#51BA55] font-semibold' : 'text-gray-500 hover:bg-gray-50'}`} >
-            <img src="/images/Profil.svg" alt="Profil" className="w-6 h-6" />
+            <img src="/images/Faq.svg" alt="Profil" className="w-6 h-6" />
             <span className="text-base">FAQ</span>
           </Link>
 

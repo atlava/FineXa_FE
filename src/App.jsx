@@ -7,6 +7,7 @@ import UserLayout from './layout/UserLayout';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register'; 
 import LupaPassword from './pages/auth/LupaPassword';
+import AturUlangPassword from './pages/auth/AturUlangPassword';
 
 // Import User
 import Profil from './pages/user/Profil'; 
@@ -29,6 +30,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/lupa-password" element={<LupaPassword />} />
+        <Route path="/atur-ulang-password" element={<AturUlangPassword />} />
 
         {/* Rute User (Dibungkus pakai UserLayout biar ada Navigasinya) */}
         <Route element={<UserLayout />}>
