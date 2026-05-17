@@ -1,7 +1,8 @@
 // 1. AREA IMPORT (Kenalan)
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AdminLayout from './components/admin/AdminLayout'; 
-import DashboardAdmin from './pages/DashboardAdmin';
+import DashboardAdmin from './pages/admin/DashboardAdmin';
+import LoginAdmin from './pages/admin/LoginAdmin'; // <-- Tambahkan baris ini
 import './App.css'; 
 
 function App() {
@@ -10,12 +11,13 @@ function App() {
     <Router>
       <Routes>
         
-        {/* Rute Khusus Admin */}
+        {/* Rute Halaman Login Admin (Berdiri sendiri tanpa Layout Sidebar) */}
+        <Route path="/admin/login" element={<LoginAdmin />} />
+
+        {/* Rute Dashboard Khusus Admin */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<DashboardAdmin />} />
         </Route>
-
-        {/* Nanti rute investor temanmu bisa ditambahkan di bawah sini */}
 
       </Routes>
     </Router>
