@@ -1,26 +1,27 @@
-// 1. AREA IMPORT (Kenalan)
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import AdminLayout from './components/admin/AdminLayout'; 
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AdminLayout from './components/admin/AdminLayout';
+import LoginAdmin from './pages/admin/LoginAdmin';
 import DashboardAdmin from './pages/admin/DashboardAdmin';
-import LoginAdmin from './pages/admin/LoginAdmin'; // <-- Tambahkan baris ini
-import './App.css'; 
+import UserManagementAdmin from './pages/admin/UserManagementAdmin';
+import FaqManagementAdmin from './pages/admin/FaqManagementAdmin';
+import AnalyticsAdmin from './pages/admin/AnalyticsAdmin';
 
 function App() {
-  // 2. AREA PETA JALAN (Routing)
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
-        
-        {/* Rute Halaman Login Admin (Berdiri sendiri tanpa Layout Sidebar) */}
+        {/* Rute Login Admin */}
         <Route path="/admin/login" element={<LoginAdmin />} />
 
         {/* Rute Dashboard Khusus Admin */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<DashboardAdmin />} />
+          <Route path="user-management" element={<UserManagementAdmin />} />
+          <Route path="faq-management" element={<FaqManagementAdmin />} />
+          <Route path="analytics" element={<AnalyticsAdmin />} />
         </Route>
-
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 
