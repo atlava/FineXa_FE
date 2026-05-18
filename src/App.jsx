@@ -15,8 +15,6 @@ import FAQ from './pages/user/FAQ';
 import Dashboard from './pages/user/Dashboard'; 
 import Kuisioner from './pages/user/Kuisioner'; 
 import HasilAnalisis from './pages/user/HasilAnalisis';
-
-// Import NotFound (Nanti kita bikin filenya)
 import NotFound from './pages/NotFound'; 
 
 import './index.css'; 
