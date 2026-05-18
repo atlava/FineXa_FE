@@ -1,23 +1,26 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-// Import Layout
+// IMPORT user
 import UserLayout from './layout/UserLayout';
-
-// Import Auth
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register'; 
 import LupaPassword from './pages/auth/LupaPassword';
 import AturUlangPassword from './pages/auth/AturUlangPassword';
-
-// Import User
 import Profil from './pages/user/Profil'; 
 import FAQ from './pages/user/FAQ'; 
 import Dashboard from './pages/user/Dashboard'; 
 import Kuisioner from './pages/user/Kuisioner'; 
 import HasilAnalisis from './pages/user/HasilAnalisis';
-
-// Import NotFound (Nanti kita bikin filenya)
 import NotFound from './pages/NotFound'; 
+
+// IMPORT Admin
+import AdminLayout from './components/admin/AdminLayout';
+import LoginAdmin from './pages/admin/LoginAdmin';
+import DashboardAdmin from './pages/admin/DashboardAdmin';
+import UserManagementAdmin from './pages/admin/UserManagementAdmin';
+import FaqManagementAdmin from './pages/admin/FaqManagementAdmin';
+import AnalyticsAdmin from './pages/admin/AnalyticsAdmin';
+
 
 import './index.css'; 
 
@@ -25,7 +28,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Rute Auth (Bebas, nggak pakai sidebar) */}
+        
+       
+        {/* RUTE AUTH & USER  */}
+       
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -41,9 +47,20 @@ function App() {
           <Route path="/hasil-analisis" element={<HasilAnalisis />} />
         </Route>
 
-        {/* Rute Nyasar (404 Not Found) - WAJIB ADA DI PALING BAWAH */}
-        {/* 2. Matiin rutenya */}
-        { <Route path="*" element={<NotFound />} /> }
+
+      
+        {/* RUTE ADMIN */}
+        <Route path="/admin/login" element={<LoginAdmin />} />
+
+        {/* Rute Dashboard Khusus Admin */}
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<DashboardAdmin />} />
+          <Route path="user-management" element={<UserManagementAdmin />} />
+          <Route path="faq-management" element={<FaqManagementAdmin />} />
+          <Route path="analytics" element={<AnalyticsAdmin />} />
+        </Route>
+
+        <Route path="*" element={<NotFound />} />
 
       </Routes>
     </BrowserRouter>
