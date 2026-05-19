@@ -1,55 +1,57 @@
-const Dashboard = () => {
-  const instrumen = [
-    { 
-      nama: "Deposito", 
-      deskripsi: "Investasi aman dengan bunga tetap", 
-      risiko: "Rendah", 
-      rekomendasi: false,
-      icon: "🛡️"
-    },
-    { 
-      nama: "Reksadana Pasar Uang", 
-      deskripsi: "Likuiditas tinggi, risiko minimal", 
-      risiko: "Rendah", 
-      rekomendasi: false,
-      icon: "📊"
-    },
-    { 
-      nama: "Reksadana Campuran", 
-      deskripsi: "Kombinasi saham dan obligasi", 
-      risiko: "Sedang", 
-      rekomendasi: true,
-      icon: "🥧"
-    },
-    { 
-      nama: "Reksadana Saham", 
-      deskripsi: "Potensi return lebih tinggi", 
-      risiko: "Sedang", 
-      rekomendasi: true,
-      icon: "📈"
-    },
-    { 
-      nama: "Saham", 
-      deskripsi: "Potensi keuntungan maksimal", 
-      risiko: "Tinggi", 
-      rekomendasi: false,
-      icon: "📉"
-    },
-    { 
-      nama: "Kripto", 
-      deskripsi: "Volatilitas sangat tinggi", 
-      risiko: "Tinggi", 
-      rekomendasi: false,
-      icon: "✨"
-    },
-  ];
+import { useState, useEffect } from 'react';
 
+const Dashboard = () => {
+  // 1. Siapkan laci kosong untuk menampung data dari Laravel
+  const [instrumen, setInstrumen] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // 2. Mesin Penyedot Data otomatis jalan saat halaman dibuka
+  useEffect(() => {
+    const fetchAssets = async () => {
+      try {
+        const token = localStorage.getItem('token'); // Ambil KTP dari brankas
+        
+        // Tembak jalur /web/assets milikmu yang dikawal auth
+        const response = await fetch('http://localhost:8000/api/assets', {
+          headers: {
+            'Accept': 'application/json', // Minta Laravel membalas dengan JSON (memicu Tahap D di controller)
+            'Authorization': `Bearer ${token}` 
+          }
+        });
+        
+        const data = await response.json();
+        
+        if (data.status === 'success') {
+          setInstrumen(data.data); // Masukkan data aset ke laci React
+        }
+      } catch (error) {
+        console.error("Gagal mengambil data aset", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchAssets();
+  }, []);
+
+  // 3. Tips Investasi (Tetap Statis)
   const tips = [
     { title: "Diversifikasi Portfolio", desc: "Jangan menaruh semua telur dalam satu keranjang. Sebarkan investasi Anda ke berbagai instrumen untuk mengurangi risiko.", icon: "🎯" },
     { title: "Investasi Jangka Panjang", desc: "Investasi terbaik adalah yang dilakukan secara konsisten dalam jangka waktu panjang. Bersabar adalah kunci kesuksesan.", icon: "🕒" },
     { title: "Pahami Profil Risiko", desc: "Kenali toleransi risiko Anda sebelum berinvestasi. Investasi yang tepat adalah yang sesuai dengan kondisi finansial Anda.", icon: "🛡️" },
     { title: "Review Berkala", desc: "Evaluasi portofolio investasi Anda secara rutin dan sesuaikan strategi berdasarkan perubahan kondisi pasar dan tujuan finansial.", icon: "💡" }
   ];
+
+  // 4. Pabrik Ikon Otomatis berdasarkan Kategori dari Database
+  const getIcon = (kategori) => {
+    if (kategori === 'Deposito') return '🛡️';
+    if (kategori === 'Reksadana') return '🥧';
+    if (kategori === 'Obligasi') return '📄';
+    if (kategori === 'Saham') return '📈';
+    if (kategori === 'Kripto') return '✨';
+    if (kategori === 'Logam Mulia') return '🥇';
+    return '💼'; // Default icon
+  };
 
   return (
     <div className="pb-10">
@@ -58,58 +60,58 @@ const Dashboard = () => {
         <div className="relative z-10">
           <h1 className="text-3xl md:text-4xl font-bold mb-3">Selamat Datang di FineXa! 👋</h1>
           <p className="text-white/90 font-light text-sm md:text-base max-w-2xl leading-relaxed">
-            Mulai perjalanan investasi Anda dengan rekomendasi berbasis AI yang disesuaikan dengan profil risiko dan tujuan finansial Anda.
+            Mulai perjalanan investasi Anda dengan rekomendasi dari tim FineXa.
           </p>
         </div>
-        {/* Ornamen Lingkaran ala Figma */}
         <div className="absolute -top-24 -right-10 w-64 h-64 bg-white opacity-10 rounded-full pointer-events-none"></div>
       </div>
 
       {/* Instrumen Investasi Section */}
       <div className="mb-12">
         <div className="mb-6">
-          <h2 className="text-2xl font-bold text-gray-800">Instrumen Investasi</h2>
-          <p className="text-sm text-gray-500 mt-1">Rekomendasi instrumen berdasarkan profil risiko <span className="font-bold text-gray-800">Moderat</span></p>
+          <h2 className="text-2xl font-bold text-gray-800">Katalog Instrumen Investasi</h2>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {instrumen.map((item, index) => (
-            <div 
-              key={index} 
-              className={`bg-white p-6 rounded-[20px] shadow-sm relative group flex flex-col h-full ${
-                item.rekomendasi ? 'border-2 border-[#FFC107]' : 'border border-gray-100'
-              }`}
-            >
-              {item.rekomendasi && (
-                <span className="absolute top-4 right-4 text-[#FFC107] text-[10px] font-bold uppercase tracking-wider">
-                  Rekomendasi
-                </span>
-              )}
-              
-              {/* Icon Box */}
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4 ${
-                item.rekomendasi ? 'bg-yellow-50' : 'bg-gray-50'
-              }`}>
-                {item.icon}
-              </div>
+        {isLoading ? (
+          <div className="flex justify-center py-10">
+            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-[#51BA55]"></div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Lakukan perulangan (Mapping) data dari database */}
+            {instrumen.map((item) => (
+              <div 
+                key={item.id_aset} 
+                className="bg-white p-6 rounded-[20px] shadow-sm relative group flex flex-col h-full border border-gray-100 hover:border-[#51BA55] transition-all"
+              >
+                
+                {/* Icon Box Dinamis */}
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4 bg-gray-50">
+                  {getIcon(item.kategori_aset)}
+                </div>
 
-              <h3 className="text-lg font-bold text-gray-800 mb-1">{item.nama}</h3>
-              <p className="text-xs text-gray-500 mb-6 font-light">{item.deskripsi}</p>
-              
-              <div className="flex justify-between items-end mt-auto pt-4 border-t border-gray-50">
-                <div>
-                  <p className="text-[10px] text-gray-400 uppercase font-semibold mb-1">Risiko</p>
-                  <p className="text-sm font-bold text-gray-800">{item.risiko}</p>
-                </div>
-                <div className="text-right">
-                  <p className={`text-sm font-bold ${item.returnVal === 'Variatif' ? 'text-[#51BA55]' : 'text-[#51BA55]'}`}>
-                    {item.returnVal}
-                  </p>
+                {/* Ambil nama_aset dari tabel */}
+                <h3 className="text-lg font-bold text-gray-800 mb-1">{item.nama_aset}</h3>
+                
+                {/* Ambil kategori_aset dari tabel sebagai deskripsi pengganti */}
+                <p className="text-xs text-gray-500 mb-6 font-light">Kategori: {item.kategori_aset}</p>
+                
+                <div className="flex justify-between items-end mt-auto pt-4 border-t border-gray-50">
+                  <div>
+                    <p className="text-[10px] text-gray-400 uppercase font-semibold mb-1">Risiko</p>
+                    {/* Ambil tingkat_risiko dari tabel */}
+                    <p className={`text-sm font-bold ${
+                        item.tingkat_risiko.includes('Tinggi') ? 'text-red-500' : 
+                        item.tingkat_risiko === 'Sedang' ? 'text-yellow-500' : 'text-green-500'
+                    }`}>
+                        {item.tingkat_risiko}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Tips Investasi Section */}

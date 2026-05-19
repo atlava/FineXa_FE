@@ -1,6 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-finexa: #12A853;
+  --color-finexaDark: #0e8a43;
+}
 
 @layer base {
   body {
