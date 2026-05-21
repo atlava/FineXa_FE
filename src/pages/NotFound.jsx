@@ -3,6 +3,19 @@ import { useNavigate } from 'react-router-dom';
 const NotFound = () => {
   const navigate = useNavigate();
 
+  // 🚨 LOGIKA DETEKSI PANGKAT 🚨
+  const handleKeBeranda = () => {
+    const role = localStorage.getItem('role'); // Intip laci pangkat
+    
+    if (role === 'admin') {
+      // Jika dia Admin, kembalikan ke markas Admin
+      navigate('/admin-dashboard');
+    } else {
+      // Jika dia Investor atau belum login, kembalikan ke dashboard user
+      navigate('/dashboard');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#F8F9FA] flex flex-col items-center justify-center p-6 text-center">
       {/* Ikon Nyasar */}
@@ -27,7 +40,7 @@ const NotFound = () => {
           Kembali
         </button>
         <button 
-          onClick={() => navigate('/dashboard')}
+          onClick={handleKeBeranda} // Panggil fungsi Polisi Lalu Lintas di sini
           className="bg-[#51BA55] text-white px-8 py-3 rounded-xl font-bold shadow-lg shadow-green-100 hover:bg-[#3A8E3F] hover:-translate-y-0.5 transition-all"
         >
           Ke Beranda

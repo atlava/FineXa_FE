@@ -81,9 +81,9 @@ const Kuisioner = () => {
       const data = await response.json();
 
       if (response.ok) {
-         navigate('/dashboard'); 
+         navigate('/hasil-analisis'); 
       } else {
-         // Jika Laravel masih marah (Validasi gagal)
+         // Jika Validasi gagal
          setErrorMsg(data.message || 'Gagal menyimpan hasil kuesioner.');
       }
     } catch (err) {

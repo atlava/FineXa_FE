@@ -15,7 +15,7 @@ import NotFound from './pages/NotFound';
 
 // IMPORT Admin
 import AdminLayout from './components/admin/AdminLayout';
-import LoginAdmin from './pages/admin/LoginAdmin';
+
 import DashboardAdmin from './pages/admin/DashboardAdmin';
 import UserManagementAdmin from './pages/admin/UserManagementAdmin';
 import FaqManagementAdmin from './pages/admin/FaqManagementAdmin';
@@ -49,11 +49,9 @@ function App() {
 
 
       
-        {/* RUTE ADMIN */}
-        <Route path="/admin/login" element={<LoginAdmin />} />
 
         {/* Rute Dashboard Khusus Admin */}
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route path="/admin-dashboard" element={<AdminLayout />}>
           <Route index element={<DashboardAdmin />} />
           <Route path="user-management" element={<UserManagementAdmin />} />
           <Route path="faq-management" element={<FaqManagementAdmin />} />

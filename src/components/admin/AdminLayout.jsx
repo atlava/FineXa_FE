@@ -10,16 +10,40 @@ const AdminLayout = () => {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   const menuItems = [
-    { name: 'Dashboard', path: '/admin', icon: LayoutDashboard },
-    { name: 'User Management', path: '/admin/user-management', icon: Users },
-    { name: 'FAQ Management', path: '/admin/faq-management', icon: FileText },
-    { name: 'Analytics', path: '/admin/analytics', icon: BarChart3 },
+    { name: 'Dashboard', path: '/admin-dashboard', icon: LayoutDashboard },
+    { name: 'User Management', path: '/admin-dashboard/user-management', icon: Users },
+    { name: 'FAQ Management', path: '/admin-dashboard/faq-management', icon: FileText },
+    { name: 'Analytics', path: '/admin-dashboard/analytics', icon: BarChart3 },
   ];
 
-  // Fungsi eksekusi saat tombol "Ya, Keluar" diklik
-  const handleLogout = () => {
-    setIsLogoutModalOpen(false); // Tutup modal
-    navigate('/admin/login');    // Arahkan kembali ke halaman login
+  //  FUNGSI LOGOUT 
+  const handleLogout = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      
+      // 1. Telpon Dapur Laravel untuk menghancurkan Token di server (Jika token masih ada)
+      if (token) {
+        await fetch('http://localhost:8000/api/logout', {
+          method: 'POST', 
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+      }
+    } catch (error) {
+      console.error("Terjadi kesalahan saat logout:", error);
+    } finally {
+      // 2. Apapun balasan dari server (sukses/error), KITA WAJIB MEMBERSIHKAN BRANKAS!
+      localStorage.removeItem('token');
+      localStorage.removeItem('role'); // Jangan lupa hapus role juga!
+      
+      // 3. Tutup modal pop-up
+      setIsLogoutModalOpen(false); 
+      
+      // 4. Arahkan kembali ke halaman login
+      navigate('/login'); 
+    }
   };
 
   return (
