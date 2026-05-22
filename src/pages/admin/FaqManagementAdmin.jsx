@@ -12,8 +12,8 @@ const FaqManagementAdmin = () => {
     { id: 6, category: 'Risiko Investasi', question: 'Memahami Risiko Investasi', answer: 'Setiap investasi memiliki risiko, termasuk risiko pasar, risiko likuiditas, dan risiko inflasi yang wajib dipahami sebelum memulai.', status: 'published' },
   ]);
 
-  // 2. STATE UNTUK NAVIGASI VIEW & INTERAKSI
-  const [isAdding, setIsAdding] = useState(false); // Mengontrol swap ke halaman form
+  // 2. STATE UNTUK NAVIGASI VIEW & INTERAKSI (Sekarang isAdding mengontrol Pop-up)
+  const [isAdding, setIsAdding] = useState(false); 
   const [openFaqId, setOpenFaqId] = useState(null);
   const [deleteFaqTarget, setDeleteFaqTarget] = useState(null);
 
@@ -21,12 +21,12 @@ const FaqManagementAdmin = () => {
   const [newQuestion, setNewQuestion] = useState('');
   const [newAnswer, setNewAnswer] = useState('');
   const [isActive, setIsActive] = useState(false);
-  const [newCategory, setNewCategory] = useState('Tentang Platform'); // Default kategori
+  const [newCategory, setNewCategory] = useState('Tentang Platform'); 
 
   // Hitung Data Statistik Mini Cards
   const totalKonten = faqs.length;
   const publishedCount = faqs.filter(f => f.status === 'published').length;
-  const unpublishedCount = faqs.filter(f => f.status === 'unpublished').length + 2; // Plus cadangan statis figma
+  const unpublishedCount = faqs.filter(f => f.status === 'unpublished').length + 2; 
 
   // Toggle Akordion
   const toggleFaq = (id) => {
@@ -52,9 +52,9 @@ const FaqManagementAdmin = () => {
       status: isActive ? 'published' : 'unpublished'
     };
 
-    setFaqs([newFaqItem, ...faqs]); // Masukkan ke urutan paling atas
+    setFaqs([newFaqItem, ...faqs]); 
     
-    // Reset Form & Kembali ke Tampilan List
+    // Reset Form & Tutup Pop-up
     setNewQuestion('');
     setNewAnswer('');
     setIsActive(false);
@@ -62,99 +62,10 @@ const FaqManagementAdmin = () => {
   };
 
   // ========================================================
-  // TAMPILAN KEDUA: FORM TAMBAH FAQ BARU (PERSIS FIGMA)
-  // ========================================================
-  if (isAdding) {
-    return (
-      <div className="max-w-3xl mx-auto space-y-6 animate-fade-in">
-        
-        {/* HEADER FORM */}
-        <div className="flex justify-between items-center bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-          <div className="flex items-center gap-4">
-            <button 
-              onClick={() => setIsAdding(false)} 
-              className="p-2 hover:bg-gray-50 rounded-xl border border-gray-200 text-gray-600 transition"
-            >
-              <ArrowLeft className="w-5 h-5" />
-            </button>
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Tambah FAQ Baru</h1>
-              <p className="text-gray-400 text-xs mt-0.5">Tambahkan pertanyaan dan jawaban untuk FAQ</p>
-            </div>
-          </div>
-          <button 
-            onClick={handleSaveFaq}
-            className="flex items-center gap-2 bg-finexa hover:bg-finexaDark text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-sm transition-all"
-          >
-            <Save className="w-4 h-4" /> Simpan
-          </button>
-        </div>
-
-        {/* INPUT PILIHAN KATEGORI */}
-        <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm space-y-2">
-          <label className="text-sm font-bold text-gray-800">Pilih Kategori Konten</label>
-          <select 
-            value={newCategory} 
-            onChange={(e) => setNewCategory(e.target.value)}
-            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-finexa focus:bg-white transition-all font-medium text-gray-700"
-          >
-            <option value="Tentang Platform">Tentang Platform</option>
-            <option value="Rekomendasi Investasi">Rekomendasi Investasi</option>
-            <option value="Edukasi Investasi">Edukasi Investasi</option>
-            <option value="Profil Risiko">Profil Risiko</option>
-            <option value="Keamanan Data">Keamanan Data</option>
-            <option value="Risiko Investasi">Risiko Investasi</option>
-          </select>
-        </div>
-
-        {/* BOX 1: PERTANYAAN */}
-        <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm space-y-2">
-          <label className="text-sm font-bold text-gray-800">Pertanyaan</label>
-          <input
-            type="text"
-            placeholder="Masukkan pertanyaan..."
-            value={newQuestion}
-            onChange={(e) => setNewQuestion(e.target.value)}
-            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-finexa focus:bg-white transition-all"
-          />
-        </div>
-
-        {/* BOX 2: JAWABAN */}
-        <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm space-y-2">
-          <label className="text-sm font-bold text-gray-800">Jawaban</label>
-          <textarea
-            placeholder="Masukkan jawaban..."
-            rows="6"
-            value={newAnswer}
-            onChange={(e) => setNewAnswer(e.target.value)}
-            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-finexa focus:bg-white transition-all resize-none leading-relaxed"
-          />
-        </div>
-
-        {/* BOX 3: STATUS AKTIF CHECKBOX */}
-        <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex items-start gap-4">
-          <input
-            type="checkbox"
-            id="active-status"
-            checked={isActive}
-            onChange={(e) => setIsActive(e.target.checked)}
-            className="w-5 h-5 rounded border-gray-300 text-finexa focus:ring-finexa accent-finexa mt-0.5 cursor-pointer"
-          />
-          <label htmlFor="active-status" className="flex flex-col cursor-pointer select-none">
-            <span className="text-sm font-bold text-gray-800">Aktif</span>
-            <span className="text-xs text-gray-400 mt-0.5">FAQ akan ditampilkan kepada pengguna</span>
-          </label>
-        </div>
-
-      </div>
-    );
-  }
-
-  // ========================================================
   // TAMPILAN UTAMA: HALAMAN LIST CONTENT MANAGEMENT
   // ========================================================
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 relative">
       
       {/* HEADER SECTION */}
       <div className="flex justify-between items-center">
@@ -163,7 +74,7 @@ const FaqManagementAdmin = () => {
           <p className="text-gray-500 text-sm mt-1">Kelola konten edukasi dan materi pembelajaran</p>
         </div>
         <button 
-          onClick={() => setIsAdding(true)} // Klik ini untuk masuk halaman tambah FAQ
+          onClick={() => setIsAdding(true)} // Klik ini untuk memunculkan pop-up modal
           className="flex items-center gap-2 bg-finexa hover:bg-finexaDark text-white px-4 py-2.5 rounded-xl text-sm font-semibold shadow-sm transition-all"
         >
           <Plus className="w-4 h-4" /> Tambah FAQ
@@ -224,6 +135,99 @@ const FaqManagementAdmin = () => {
         })}
       </div>
 
+      {/* ========================================================
+          POP UP MODAL: FORM TAMBAH FAQ BARU (PERSIS FIGMA)
+          ======================================================== */}
+      {isAdding && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-50 flex flex-col animate-fade-in">
+            
+            {/* HEADER POP-UP */}
+            <div className="sticky top-0 bg-white p-6 border-b border-gray-100 flex justify-between items-center z-10 rounded-t-2xl">
+              <div className="flex items-center gap-4">
+                <button 
+                  onClick={() => setIsAdding(false)} 
+                  className="p-2 hover:bg-gray-50 rounded-xl border border-gray-200 text-gray-600 transition"
+                >
+                  <ArrowLeft className="w-5 h-5" />
+                </button>
+                <div>
+                  <h2 className="text-xl font-bold text-gray-900 tracking-tight">Tambah FAQ Baru</h2>
+                  <p className="text-gray-400 text-xs mt-0.5">Tambahkan pertanyaan dan jawaban untuk FAQ</p>
+                </div>
+              </div>
+              <button 
+                onClick={handleSaveFaq}
+                className="flex items-center gap-2 bg-finexa hover:bg-finexaDark text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-sm transition-all"
+              >
+                <Save className="w-4 h-4" /> Simpan
+              </button>
+            </div>
+
+            {/* FORM ISI KONTEN (SCROLLABLE JIKA PANJANG) */}
+            <div className="p-6 space-y-6">
+              
+              {/* INPUT PILIHAN KATEGORI */}
+              <div className="space-y-2">
+                <label className="text-sm font-bold text-gray-800">Pilih Kategori Konten</label>
+                <select 
+                  value={newCategory} 
+                  onChange={(e) => setNewCategory(e.target.value)}
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-finexa focus:bg-white transition-all font-medium text-gray-700"
+                >
+                  <option value="Tentang Platform">Tentang Platform</option>
+                  <option value="Rekomendasi Investasi">Rekomendasi Investasi</option>
+                  <option value="Edukasi Investasi">Edukasi Investasi</option>
+                  <option value="Profil Risiko">Profil Risiko</option>
+                  <option value="Keamanan Data">Keamanan Data</option>
+                  <option value="Risiko Investasi">Risiko Investasi</option>
+                </select>
+              </div>
+
+              {/* BOX 1: PERTANYAAN */}
+              <div className="space-y-2">
+                <label className="text-sm font-bold text-gray-800">Pertanyaan</label>
+                <input
+                  type="text"
+                  placeholder="Masukkan pertanyaan..."
+                  value={newQuestion}
+                  onChange={(e) => setNewQuestion(e.target.value)}
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-finexa focus:bg-white transition-all"
+                />
+              </div>
+
+              {/* BOX 2: JAWABAN */}
+              <div className="space-y-2">
+                <label className="text-sm font-bold text-gray-800">Jawaban</label>
+                <textarea
+                  placeholder="Masukkan jawaban..."
+                  rows="5"
+                  value={newAnswer}
+                  onChange={(e) => setNewAnswer(e.target.value)}
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-finexa focus:bg-white transition-all resize-none leading-relaxed"
+                />
+              </div>
+
+              {/* BOX 3: STATUS AKTIF CHECKBOX */}
+              <div className="flex items-start gap-4 bg-gray-50 p-4 rounded-xl border border-gray-100">
+                <input
+                  type="checkbox"
+                  id="active-status"
+                  checked={isActive}
+                  onChange={(e) => setIsActive(e.target.checked)}
+                  className="w-5 h-5 rounded border-gray-300 text-finexa focus:ring-finexa accent-finexa mt-0.5 cursor-pointer"
+                />
+                <label htmlFor="active-status" className="flex flex-col cursor-pointer select-none">
+                  <span className="text-sm font-bold text-gray-800">Aktif</span>
+                  <span className="text-xs text-gray-400 mt-0.5">FAQ akan ditampilkan kepada pengguna</span>
+                </label>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* POP UP MODAL: DELETE CONFIRMATION */}
       {deleteFaqTarget && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
@@ -243,9 +247,9 @@ const FaqManagementAdmin = () => {
             <div className="mt-6 flex flex-col gap-2">
               <button 
                 onClick={handleConfirmDelete}
-                className="w-full py-2.5 bg-white border border-gray-300 hover:bg-gray-50 rounded-xl text-xs font-bold text-gray-700 shadow-sm transition-all"
+                className="w-full py-2.5 bg-red-500 hover:bg-red-600 rounded-xl text-xs font-bold text-white shadow-sm transition-all"
               >
-                Ya
+                Ya, Hapus
               </button>
               <button 
                 onClick={() => setDeleteFaqTarget(null)}

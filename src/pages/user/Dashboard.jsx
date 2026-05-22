@@ -51,7 +51,8 @@ const Dashboard = () => {
         const data = await response.json();
 
         if (data.status === 'success') {
-          setInstrumen(data.data);
+          setInstrumen(data.data); // Masukkan data aset ke laci React
+          console.log("Cek Data Laravel:", data.data);
         }
       } catch (error) {
         console.error("Gagal mengambil data aset", error);
