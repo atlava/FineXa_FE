@@ -6,7 +6,7 @@ const AdviceResult = () => {
   const [profilData, setProfilData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // 1. Kamus Teks Deskripsi Statis
+  // 1. Kamus Teks Deskripsi Statis untuk Profil Utama
   const kamusProfil = {
     'Konservatif': {
       icon: '🛡️',
@@ -76,6 +76,34 @@ const AdviceResult = () => {
   const profilAktif = profilData.profil_risiko || 'Moderat'; // Default jika kosong
   const infoStatis = kamusProfil[profilAktif] || kamusProfil['Moderat'];
 
+  // 🚨 MERAKIT ARRAY DINAMIS DENGAN DESKRIPSI YANG LEBIH EDUKATIF 🚨
+  const alokasiAset = [
+    {
+      nama: "Pasar Uang / Deposito / Logam Mulia",
+      persen: `${parseFloat(profilData.persen_pasar_uang).toFixed(2)}%`,
+      warna: "bg-blue-400",
+      deskripsi: "Sebagai fondasi pelindung kekayaan, produk investasi ini memiliki tingkat risiko paling rendah dan nilai yang amat stabil. Porsi ini sangat krusial untuk difungsikan sebagai dana darurat. Meskipun imbal hasilnya tidak masif, keunggulan utamanya adalah likuiditas tinggi. uangmu selalu siap dicairkan kapan saja tanpa risiko kerugian saat menghadapi situasi mendesak."
+    },
+    {
+      nama: "Obligasi / Pendapatan Tetap",
+      persen: `${parseFloat(profilData.persen_obligasi).toFixed(2)}%`,
+      warna: "bg-[#51BA55]",
+      deskripsi: "Berperan sebagai bantalan penyeimbang dalam portofoliomu, produk investasi ini memberikan kepastian imbal hasil yang nilainya secara konsisten mengalahkan bunga tabungan dan inflasi. Goncangan harganya sangat terukur dan minim, sehingga amat ideal untuk menjaga kestabilan nilai uangmu sambil tetap menikmati aliran pertumbuhan yang aman."
+    },
+    {
+      nama: "Reksadana Campuran",
+      persen: `${parseFloat(profilData.persen_campuran).toFixed(2)}%`,
+      warna: "bg-[#FFC107]",
+      deskripsi: "Merupakan jembatan penengah yang taktis, produk investasi ini secara otomatis memadukan stabilitas dari pendapatan tetap dan potensi pertumbuhan dari saham. Porsi ini didesain agar uangmu tidak hanya sekadar bertahan dari gerusan inflasi, tetapi juga mampu bertumbuh secara moderat tanpa harus mengalami pergerakan harga yang terlalu ekstrem."
+    },
+    {
+      nama: "Saham / Kripto",
+      persen: `${parseFloat(profilData.persen_saham).toFixed(2)}%`,
+      warna: "bg-red-400",
+      deskripsi: "Ini adalah mesin pendorong utama (booster) untuk melipatgandakan kekayaan. Meski pergerakan harganya bisa sangat tajam dalam waktu singkat, instrumen ini menawarkan potensi keuntungan paling tinggi untuk jangka panjang (di atas 5 tahun). Porsinya telah ditakar secara khusus agar kamu bisa menikmati pertumbuhan maksimal tanpa mengorbankan ketenangan pikiranmu."
+    }
+  ];
+
   return (
     <div className="max-w-3xl mx-auto w-full pt-6 md:pt-10 pb-20">
       
@@ -101,34 +129,29 @@ const AdviceResult = () => {
             {infoStatis.teks}
           </p>
 
-          <div className="bg-gray-50 rounded-xl p-4 md:p-6 inline-block text-left w-full max-w-md border border-gray-100">
-            <p className="text-xs font-bold text-gray-800 mb-3 uppercase">Porsi Investasi Ideal:</p>
+          {/* BOX PORSI INVESTASI IDEAL DENGAN KETERANGAN */}
+          <div className="bg-gray-50 rounded-2xl p-5 md:p-6 text-left w-full max-w-xl mx-auto border border-gray-100 shadow-inner">
+            <p className="text-xs font-bold text-gray-400 mb-4 uppercase tracking-wider">Porsi Investasi Ideal:</p>
             
-            {/* 4 BARIS PRESENTASE SESUAI DATABASE */}
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-3 h-3 rounded-full bg-blue-400"></div>
-              <span className="text-sm text-gray-600 flex-grow">Pasar Uang / Deposito / Logam Mulia</span>
-              <span className="text-sm font-bold text-gray-800">{profilData.persen_pasar_uang}%</span>
+            <div className="space-y-4">
+              {alokasiAset.map((item, index) => (
+                <div key={index} className="flex flex-col gap-1 border-b border-gray-200/40 pb-3 last:border-0 last:pb-0">
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-3">
+                      <div className={`w-3 h-3 rounded-full ${item.warna} flex-shrink-0`}></div>
+                      <span className="text-sm font-semibold text-gray-700">{item.nama}</span>
+                    </div>
+                    <span className="text-sm font-extrabold text-gray-900 bg-white px-2.5 py-0.5 rounded-lg border border-gray-100 shadow-sm">
+                      {item.persen}
+                    </span>
+                  </div>
+                  {/* Teks Keterangan Dinamis di Bawah Persentase */}
+                  <p className="text-xs text-gray-400 ml-6 leading-relaxed font-light">
+                    {item.deskripsi}
+                  </p>
+                </div>
+              ))}
             </div>
-            
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-3 h-3 rounded-full bg-[#51BA55]"></div>
-              <span className="text-sm text-gray-600 flex-grow">Obligasi / Pendapatan Tetap</span>
-              <span className="text-sm font-bold text-gray-800">{profilData.persen_obligasi}%</span>
-            </div>
-
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-3 h-3 rounded-full bg-[#FFC107]"></div>
-              <span className="text-sm text-gray-600 flex-grow">Reksadana Campuran</span>
-              <span className="text-sm font-bold text-gray-800">{profilData.persen_campuran}%</span>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <div className="w-3 h-3 rounded-full bg-red-400"></div>
-              <span className="text-sm text-gray-600 flex-grow">Saham / Kripto</span>
-              <span className="text-sm font-bold text-gray-800">{profilData.persen_saham}%</span>
-            </div>
-            {/* ------------------------------------- */}
 
           </div>
         </div>

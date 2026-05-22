@@ -103,44 +103,46 @@ const UserLayout = () => {
       {/* 3. BOTTOM NAV (MOBILE) */}
       <nav className="md:hidden fixed bottom-0 left-0 w-full bg-white z-40 border-t border-gray-100 flex justify-around items-center px-2 py-3 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
         <Link to="/dashboard" className={`flex flex-col items-center gap-1 p-2 ${location.pathname === '/dashboard' ? 'text-[#51BA55]' : 'text-gray-400'}`}>
-          <img 
-            src="/images/Dashboard.svg" 
-            alt="Dashboard" 
+          <img
+            src="/images/Dashboard.svg"
+            alt="Dashboard"
             className={`w-6 h-6 transition-all ${location.pathname === '/dashboard' ? '' : 'opacity-50 grayscale'}`} />
           <span className="text-[10px] font-medium">Home</span>
         </Link>
 
         <Link to="/hasil-analisis" className={`flex flex-col items-center gap-1 p-2 ${location.pathname === '/hasil-analisis' ? 'text-[#51BA55]' : 'text-gray-400'}`}>
-          <img 
-            src="/images/Analisis.svg" 
-            alt="Analisis" 
-            className={`w-6 h-6 transition-all ${location.pathname === '/hasil-analisis' ? '' : 'opacity-50 grayscale'}`} 
+          <img
+            src="/images/Analisis.svg"
+            alt="Analisis"
+            className={`w-6 h-6 transition-all ${location.pathname === '/hasil-analisis' ? '' : 'opacity-50 grayscale'}`}
           />
           <span className="text-[10px] font-medium">Hasil</span>
         </Link>
 
         <Link to="/profil" className={`flex flex-col items-center gap-1 p-2 ${location.pathname === '/profil' ? 'text-[#51BA55]' : 'text-gray-400'}`}>
-          <img 
-            src="/images/Profil.svg" 
-            alt="Profil" 
-            className={`w-6 h-6 transition-all ${location.pathname === '/profil' ? '' : 'opacity-50 grayscale'}`} 
+          <img
+            src="/images/Profil.svg"
+            alt="Profil"
+            className={`w-6 h-6 transition-all ${location.pathname === '/profil' ? '' : 'opacity-50 grayscale'}`}
           />
           <span className="text-[10px] font-medium">Profil</span>
         </Link>
 
         <Link to="/faq" className={`flex flex-col items-center gap-1 p-2 ${location.pathname === '/faq' ? 'text-[#51BA55]' : 'text-gray-400'}`}>
-          <img 
-            src="/images/Faq.svg" 
-            alt="FAQ" 
-            className={`w-6 h-6 transition-all ${location.pathname === '/faq' ? '' : 'opacity-50 grayscale'}`} 
+          <img
+            src="/images/Faq.svg"
+            alt="FAQ"
+            className={`w-6 h-6 transition-all ${location.pathname === '/faq' ? '' : 'opacity-50 grayscale'}`}
           />
           <span className="text-[10px] font-medium">FAQ</span>
         </Link>
+
       </nav>
 
       {/* 4. KONTEN UTAMA HALAMAN */}
-      <main className="flex-grow ml-0 md:ml-64 p-6 md:p-8 w-full box-border">
-        <Outlet /> 
+      <main className="flex-grow ml-0 md:ml-64 p-6 md:p-8">
+        {/* <Outlet /> ini adalah portal ajaib. Isi halaman Dashboard, Profil, dll bakal muncul di sini otomatis! */}
+        <Outlet />
       </main>
 
       {/* ======================================================== */}

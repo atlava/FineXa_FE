@@ -115,7 +115,7 @@ const DashboardAdmin = () => {
             <span className="text-emerald-500 text-xs font-bold flex items-center gap-1">↗ Live</span>
           </div>
           <span className="text-gray-400 text-xs font-medium mt-4">Content Items</span>
-          <span className="text-3xl font-bold text-gray-800 mt-1">{stats.total_assets}</span>
+          <span className="text-3xl font-bold text-gray-800 mt-1">{stats.total_faq || 0}</span>
         </div>
       </div>
 
