@@ -12,55 +12,55 @@ const AnalyticsAdmin = () => {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 md:space-y-6">
       
       {/* 1. TITLE SECTION */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-950 tracking-tight">Analytics</h1>
-        <p className="text-gray-500 text-sm mt-1">Insight dan performa platform FineXa</p>
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-950 tracking-tight">Analytics</h1>
+        <p className="text-gray-500 text-xs md:text-sm mt-1">Insight dan performa platform FineXa</p>
       </div>
 
       {/* 2. THREE STATS CARDS WITH PERFORMANCE INDICATORS */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
         
         {/* Card 1: Total FAQ Views */}
-        <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
+        <div className="bg-white p-5 md:p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
           <div>
-            <div className="p-2.5 bg-emerald-50 rounded-xl max-w-max text-emerald-600">
-              <Eye className="w-5 h-5" />
+            <div className="p-2 md:p-2.5 bg-emerald-50 rounded-xl max-w-max text-emerald-600">
+              <Eye className="w-4 h-4 md:w-5 md:h-5" />
             </div>
-            <p className="text-xs font-semibold text-gray-400 mt-4 tracking-wide">Total FAQ Views</p>
-            <p className="text-3xl font-extrabold text-gray-900 mt-1">9,700</p>
+            <p className="text-[11px] md:text-xs font-semibold text-gray-400 mt-4 tracking-wide">Total FAQ Views</p>
+            <p className="text-2xl md:text-3xl font-extrabold text-gray-900 mt-1">9,700</p>
           </div>
-          <span className="text-[11px] font-bold text-emerald-500 mt-4 flex items-center gap-1">
+          <span className="text-[10px] md:text-[11px] font-bold text-emerald-500 mt-4 flex items-center gap-1">
             +12.5% dari minggu lalu
           </span>
         </div>
 
         {/* Card 2: Active Users */}
-        <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
+        <div className="bg-white p-5 md:p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
           <div>
-            <div className="p-2.5 bg-blue-50 rounded-xl max-w-max text-blue-600">
-              <Users className="w-5 h-5" />
+            <div className="p-2 md:p-2.5 bg-blue-50 rounded-xl max-w-max text-blue-600">
+              <Users className="w-4 h-4 md:w-5 md:h-5" />
             </div>
-            <p className="text-xs font-semibold text-gray-400 mt-4 tracking-wide">Active Users</p>
-            <p className="text-3xl font-extrabold text-gray-900 mt-1">3,130</p>
+            <p className="text-[11px] md:text-xs font-semibold text-gray-400 mt-4 tracking-wide">Active Users</p>
+            <p className="text-2xl md:text-3xl font-extrabold text-gray-900 mt-1">3,130</p>
           </div>
-          <span className="text-[11px] font-bold text-emerald-500 mt-4 flex items-center gap-1">
+          <span className="text-[10px] md:text-[11px] font-bold text-emerald-500 mt-4 flex items-center gap-1">
             +8.2% dari minggu lalu
           </span>
         </div>
 
         {/* Card 3: Avg. Engagement */}
-        <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
+        <div className="bg-white p-5 md:p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between sm:col-span-2 md:col-span-1">
           <div>
-            <div className="p-2.5 bg-emerald-50 rounded-xl max-w-max text-emerald-600">
-              <Zap className="w-5 h-5" />
+            <div className="p-2 md:p-2.5 bg-emerald-50 rounded-xl max-w-max text-emerald-600">
+              <Zap className="w-4 h-4 md:w-5 md:h-5" />
             </div>
-            <p className="text-xs font-semibold text-gray-400 mt-4 tracking-wide">Avg. Engagement</p>
-            <p className="text-3xl font-extrabold text-gray-900 mt-1">73.5%</p>
+            <p className="text-[11px] md:text-xs font-semibold text-gray-400 mt-4 tracking-wide">Avg. Engagement</p>
+            <p className="text-2xl md:text-3xl font-extrabold text-gray-900 mt-1">73.5%</p>
           </div>
-          <span className="text-[11px] font-bold text-red-500 mt-4 flex items-center gap-1">
+          <span className="text-[10px] md:text-[11px] font-bold text-red-500 mt-4 flex items-center gap-1">
             -2.3% dari minggu lalu
           </span>
         </div>
@@ -69,33 +69,36 @@ const AnalyticsAdmin = () => {
 
       {/* 3. TABLE: TOP PERFORMING CONTENT */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-        <div className="px-6 py-5 border-b border-gray-100">
-          <h3 className="font-bold text-lg text-gray-800">Top Performing Content</h3>
+        <div className="px-5 md:px-6 py-4 md:py-5 border-b border-gray-100">
+          <h3 className="font-bold text-base md:text-lg text-gray-800">Top Performing Content</h3>
         </div>
+        
+        {/* Wrapper overflow-x-auto untuk horizontal scroll di HP */}
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm text-gray-600">
-            <thead className="bg-gray-50 text-gray-400 text-xs font-bold border-b border-gray-100">
+          {/* min-w-[600px] memaksa tabel tetap lebar dan bisa di-scroll di layar sempit */}
+          <table className="w-full text-left text-sm text-gray-600 min-w-[600px]">
+            <thead className="bg-gray-50 text-gray-400 text-[10px] md:text-xs font-bold border-b border-gray-100 uppercase tracking-wider">
               <tr>
-                <th className="px-6 py-4 w-[50%]">Judul</th>
-                <th className="px-6 py-4 text-center">Views</th>
-                <th className="px-6 py-4 text-center">Engagement</th>
-                <th className="px-6 py-4">Performance</th>
+                <th className="px-5 md:px-6 py-3 md:py-4 w-[50%] whitespace-nowrap">Judul</th>
+                <th className="px-5 md:px-6 py-3 md:py-4 text-center whitespace-nowrap">Views</th>
+                <th className="px-5 md:px-6 py-3 md:py-4 text-center whitespace-nowrap">Engagement</th>
+                <th className="px-5 md:px-6 py-3 md:py-4 whitespace-nowrap">Performance</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 text-gray-700 font-medium">
               {analyticsData.map((data) => (
                 <tr key={data.id} className="hover:bg-gray-50/40 transition">
                   {/* Judul Konten */}
-                  <td className="px-6 py-4.5 font-bold text-gray-900 text-sm max-w-md truncate">
+                  <td className="px-5 md:px-6 py-3 md:py-4.5 font-bold text-gray-900 text-[11px] md:text-sm max-w-[200px] md:max-w-md truncate">
                     {data.title}
                   </td>
                   {/* Views */}
-                  <td className="px-6 py-4.5 text-center text-gray-600 font-semibold">{data.views}</td>
+                  <td className="px-5 md:px-6 py-3 md:py-4.5 text-center text-gray-600 font-semibold text-[11px] md:text-sm">{data.views}</td>
                   {/* Engagement */}
-                  <td className="px-6 py-4.5 text-center text-gray-600 font-semibold">{data.engagement}</td>
+                  <td className="px-5 md:px-6 py-3 md:py-4.5 text-center text-gray-600 font-semibold text-[11px] md:text-sm">{data.engagement}</td>
                   {/* Performance Progress Bar */}
-                  <td className="px-6 py-4.5 w-48">
-                    <div className="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+                  <td className="px-5 md:px-6 py-3 md:py-4.5 w-32 md:w-48">
+                    <div className="w-full bg-gray-100 h-1.5 md:h-2 rounded-full overflow-hidden">
                       <div className={`bg-emerald-500 h-full rounded-full ${data.progress}`}></div>
                     </div>
                   </td>

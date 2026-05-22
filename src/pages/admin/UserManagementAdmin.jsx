@@ -29,76 +29,84 @@ const UserManagementAdmin = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 md:space-y-6">
       
       {/* 1. TITLE SECTION */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-950 tracking-tight">User Management</h1>
-        <p className="text-gray-500 text-sm mt-1">Kelola pengguna dan akses platform FineXa</p>
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-950 tracking-tight">User Management</h1>
+        <p className="text-gray-500 text-xs md:text-sm mt-1">Kelola pengguna dan akses platform FineXa</p>
       </div>
 
       {/* 2. SEARCH BAR INPUT */}
-      <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm relative">
+      <div className="bg-white p-3 md:p-4 rounded-xl border border-gray-100 shadow-sm relative">
         <div className="relative">
-          <Search className="absolute left-4 top-3.5 h-5 w-5 text-gray-400" />
+          <Search className="absolute left-3 md:left-4 top-3.5 h-4 w-4 md:h-5 md:w-5 text-gray-400" />
           <input
             type="text"
             placeholder="Cari nama atau email..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-finexa focus:bg-white transition-all"
+            className="w-full pl-10 md:pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-xs md:text-sm focus:outline-none focus:border-finexa focus:bg-white transition-all"
           />
         </div>
       </div>
 
       {/* 3. TABEL USER MANAGEMENT */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        {/* Wrapper overflow-x-auto untuk horizontal scroll di HP */}
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm text-gray-600">
-            <thead className="bg-gray-50 text-gray-500 text-xs font-semibold uppercase tracking-wider border-b border-gray-100">
+          {/* min-w-[800px] memaksa tabel tetap lebar dan bisa di-scroll di layar sempit */}
+          <table className="w-full text-left text-sm text-gray-600 min-w-[800px]">
+            <thead className="bg-gray-50 text-gray-500 text-[10px] md:text-xs font-semibold uppercase tracking-wider border-b border-gray-100">
               <tr>
-                <th className="px-6 py-4.5">User</th>
-                <th className="px-6 py-4.5">Profil Risiko</th>
-                <th className="px-6 py-4.5">Portfolio</th>
-                <th className="px-6 py-4.5">Join Date</th>
-                <th className="px-6 py-4.5">Last Active</th>
-                <th className="px-6 py-4.5 text-center">Actions</th>
+                <th className="px-4 md:px-6 py-3 md:py-4.5 whitespace-nowrap">User</th>
+                <th className="px-4 md:px-6 py-3 md:py-4.5 whitespace-nowrap">Profil Risiko</th>
+                <th className="px-4 md:px-6 py-3 md:py-4.5 whitespace-nowrap">Portfolio</th>
+                <th className="px-4 md:px-6 py-3 md:py-4.5 whitespace-nowrap">Join Date</th>
+                <th className="px-4 md:px-6 py-3 md:py-4.5 whitespace-nowrap">Last Active</th>
+                <th className="px-4 md:px-6 py-3 md:py-4.5 text-center whitespace-nowrap">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 text-gray-700">
               {filteredUsers.length > 0 ? (
                 filteredUsers.map((user) => (
                   <tr key={user.id} className="hover:bg-gray-50/50 transition">
-                    <td className="px-6 py-4.5 flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-full bg-gray-200 flex-shrink-0"></div>
+                    <td className="px-4 md:px-6 py-3 md:py-4.5 flex items-center gap-2 md:gap-3 whitespace-nowrap">
+                      <div className="w-7 h-7 md:w-9 md:h-9 rounded-full bg-gray-200 flex-shrink-0"></div>
                       <div className="flex flex-col">
-                        <span className="font-semibold text-gray-900 leading-tight">{user.name}</span>
-                        <span className="text-xs text-gray-400 mt-0.5">{user.email}</span>
+                        <span className="font-semibold text-gray-900 leading-tight text-xs md:text-sm">{user.name}</span>
+                        <span className="text-[10px] md:text-xs text-gray-400 mt-0.5">{user.email}</span>
                       </div>
                     </td>
-                    <td className="px-6 py-4.5">
-                      <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${user.roleColor}`}>
+                    <td className="px-4 md:px-6 py-3 md:py-4.5 whitespace-nowrap">
+                      <span className={`px-2 md:px-2.5 py-1 rounded-full text-[10px] md:text-xs font-bold ${user.roleColor}`}>
                         {user.role}
                       </span>
                     </td>
-                    <td className="px-6 py-4.5 font-semibold text-gray-900">{user.portfolio}</td>
-                    <td className="px-6 py-4.5 text-gray-500 text-xs">{user.joinDate}</td>
-                    <td className="px-6 py-4.5 text-gray-500 text-xs">{user.lastActive}</td>
-                    <td className="px-6 py-4.5">
-                      <div className="flex items-center justify-center gap-2">
+                    <td className="px-4 md:px-6 py-3 md:py-4.5 font-semibold text-gray-900 text-xs md:text-sm whitespace-nowrap">
+                      {user.portfolio}
+                    </td>
+                    <td className="px-4 md:px-6 py-3 md:py-4.5 text-gray-500 text-[10px] md:text-xs whitespace-nowrap">
+                      {user.joinDate}
+                    </td>
+                    <td className="px-4 md:px-6 py-3 md:py-4.5 text-gray-500 text-[10px] md:text-xs whitespace-nowrap">
+                      {user.lastActive}
+                    </td>
+                    <td className="px-4 md:px-6 py-3 md:py-4.5 whitespace-nowrap">
+                      <div className="flex items-center justify-center gap-1 md:gap-2">
                         {/* Tombol Detail (Mata) */}
                         <button 
                           onClick={() => setSelectedUser(user)}
-                          className="p-2 bg-blue-50 text-blue-500 rounded-xl hover:bg-blue-100 transition-colors shadow-sm"
+                          className="p-1.5 md:p-2 bg-blue-50 text-blue-500 rounded-lg md:rounded-xl hover:bg-blue-100 transition-colors shadow-sm"
                         >
-                          <Eye className="w-4 h-4" />
+                          <Eye className="w-3.5 h-3.5 md:w-4 md:h-4" />
                         </button>
                         {/* Tombol Delete (Sampah) */}
                         <button 
                           onClick={() => setDeleteUserTarget(user)}
-                          className="p-2 bg-red-50 text-red-500 rounded-xl hover:bg-red-100 transition-colors shadow-sm"
+                          className="p-1.5 md:p-2 bg-red-50 text-red-500 rounded-lg md:rounded-xl hover:bg-red-100 transition-colors shadow-sm"
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <Trash2 className="w-3.5 h-3.5 md:w-4 md:h-4" />
                         </button>
                       </div>
                     </td>
@@ -120,44 +128,44 @@ const UserManagementAdmin = () => {
       {/* POP UP MODAL 1: DETAIL USER */}
       {/* ======================================================== */}
       {selectedUser && (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 animate-fade-in">
-          <div className="bg-white rounded-3xl w-[380px] p-6 shadow-2xl relative border border-gray-50">
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 animate-fade-in p-4">
+          <div className="bg-white rounded-2xl md:rounded-3xl w-full max-w-[380px] p-5 md:p-6 shadow-2xl relative border border-gray-50">
             {/* Tombol Close */}
             <button 
               onClick={() => setSelectedUser(null)}
-              className="absolute right-5 top-5 p-1.5 rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition"
+              className="absolute right-4 md:right-5 top-4 md:top-5 p-1.5 rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4 md:w-5 md:h-5" />
             </button>
 
             {/* Judul Modal */}
-            <h3 className="text-xl font-bold text-gray-900">Detail User</h3>
-            <p className="text-gray-400 text-xs mt-0.5">Informasi lengkap mengenai User</p>
+            <h3 className="text-lg md:text-xl font-bold text-gray-900">Detail User</h3>
+            <p className="text-gray-400 text-[10px] md:text-xs mt-0.5">Informasi lengkap mengenai User</p>
 
             {/* Profil Singkat */}
-            <div className="flex items-center gap-4 my-6">
-              <div className="w-14 h-14 rounded-full bg-gray-200"></div>
+            <div className="flex items-center gap-3 md:gap-4 my-5 md:my-6">
+              <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gray-200 flex-shrink-0"></div>
               <div className="flex flex-col">
-                <span className="text-lg font-bold text-gray-900">{selectedUser.name}</span>
-                <span className={`px-2 py-0.5 rounded-full text-[11px] font-bold mt-1 max-w-max ${selectedUser.roleColor}`}>
+                <span className="text-base md:text-lg font-bold text-gray-900">{selectedUser.name}</span>
+                <span className={`px-2 py-0.5 rounded-full text-[10px] md:text-[11px] font-bold mt-1 max-w-max ${selectedUser.roleColor}`}>
                   {selectedUser.role}
                 </span>
               </div>
             </div>
 
             {/* Detail Box */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-3 p-3.5 bg-gray-50 rounded-2xl border border-gray-100">
-                <Mail className="w-4 h-4 text-gray-400" />
-                <span className="text-xs text-gray-700 font-medium">{selectedUser.email}</span>
+            <div className="space-y-2 md:space-y-3">
+              <div className="flex items-center gap-3 p-3 md:p-3.5 bg-gray-50 rounded-xl md:rounded-2xl border border-gray-100">
+                <Mail className="w-3.5 h-3.5 md:w-4 md:h-4 text-gray-400 flex-shrink-0" />
+                <span className="text-[11px] md:text-xs text-gray-700 font-medium truncate">{selectedUser.email}</span>
               </div>
-              <div className="flex items-center gap-3 p-3.5 bg-gray-50 rounded-2xl border border-gray-100">
-                <Wallet className="w-4 h-4 text-gray-400" />
-                <span className="text-xs text-gray-700 font-semibold">{selectedUser.portfolio}</span>
+              <div className="flex items-center gap-3 p-3 md:p-3.5 bg-gray-50 rounded-xl md:rounded-2xl border border-gray-100">
+                <Wallet className="w-3.5 h-3.5 md:w-4 md:h-4 text-gray-400 flex-shrink-0" />
+                <span className="text-[11px] md:text-xs text-gray-700 font-semibold truncate">{selectedUser.portfolio}</span>
               </div>
-              <div className="flex items-center gap-3 p-3.5 bg-gray-50 rounded-2xl border border-gray-100">
-                <Calendar className="w-4 h-4 text-gray-400" />
-                <span className="text-xs text-gray-700 font-medium">{selectedUser.joinDate}</span>
+              <div className="flex items-center gap-3 p-3 md:p-3.5 bg-gray-50 rounded-xl md:rounded-2xl border border-gray-100">
+                <Calendar className="w-3.5 h-3.5 md:w-4 md:h-4 text-gray-400 flex-shrink-0" />
+                <span className="text-[11px] md:text-xs text-gray-700 font-medium truncate">{selectedUser.joinDate}</span>
               </div>
             </div>
           </div>
@@ -168,33 +176,33 @@ const UserManagementAdmin = () => {
       {/* POP UP MODAL 2: DELETE CONFIRMATION */}
       {/* ======================================================== */}
       {deleteUserTarget && (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 animate-fade-in">
-          <div className="bg-white rounded-2xl w-[320px] p-6 shadow-2xl relative text-center">
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 animate-fade-in p-4">
+          <div className="bg-white rounded-2xl w-full max-w-[320px] p-5 md:p-6 shadow-2xl relative text-center">
             {/* Tombol Close */}
             <button 
               onClick={() => setDeleteUserTarget(null)}
-              className="absolute right-4 top-4 p-1 rounded-full hover:bg-gray-100 text-gray-400 transition"
+              className="absolute right-3 md:right-4 top-3 md:top-4 p-1 rounded-full hover:bg-gray-100 text-gray-400 transition"
             >
               <X className="w-4 h-4" />
             </button>
 
             {/* Isi Konfirmasi */}
-            <h3 className="text-base font-bold text-gray-900 mt-2 px-4">
+            <h3 className="text-sm md:text-base font-bold text-gray-900 mt-2 px-2 md:px-4">
               Yakin untuk Menghapus User ini?
             </h3>
-            <p className="text-gray-400 text-xs mt-1 px-4 truncate font-medium">({deleteUserTarget.name})</p>
+            <p className="text-gray-400 text-[10px] md:text-xs mt-1 px-2 md:px-4 truncate font-medium">({deleteUserTarget.name})</p>
 
             {/* Tombol Aksi */}
-            <div className="mt-6 flex flex-col gap-2">
+            <div className="mt-5 md:mt-6 flex flex-col gap-2">
               <button 
                 onClick={handleConfirmDelete}
-                className="w-full py-2.5 bg-white border border-gray-300 hover:bg-gray-50 rounded-xl text-xs font-bold text-gray-700 shadow-sm transition-all"
+                className="w-full py-2 md:py-2.5 bg-red-500 hover:bg-red-600 rounded-lg md:rounded-xl text-[11px] md:text-xs font-bold text-white shadow-sm transition-all"
               >
-                Ya
+                Ya, Hapus
               </button>
               <button 
                 onClick={() => setDeleteUserTarget(null)}
-                className="w-full py-2.5 bg-white border border-gray-300 hover:bg-gray-50 rounded-xl text-xs font-bold text-gray-700 shadow-sm transition-all"
+                className="w-full py-2 md:py-2.5 bg-white border border-gray-300 hover:bg-gray-50 rounded-lg md:rounded-xl text-[11px] md:text-xs font-bold text-gray-700 shadow-sm transition-all"
               >
                 Batalkan
               </button>
