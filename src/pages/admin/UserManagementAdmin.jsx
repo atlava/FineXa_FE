@@ -98,7 +98,7 @@ const UserManagementAdmin = () => {
       
       {/* 1. TITLE SECTION */}
       <div>
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-950 tracking-tight">User Management</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-950 tracking-tight">User Management ⚙️</h1>
         <p className="text-gray-500 text-xs md:text-sm mt-1">Kelola pengguna dan akses platform FineXa</p>
       </div>
 
@@ -122,7 +122,7 @@ const UserManagementAdmin = () => {
         <div className="overflow-x-auto">
           {/* min-w-[800px] memaksa tabel tetap lebar dan bisa di-scroll di layar sempit */}
           <table className="w-full text-left text-sm text-gray-600 min-w-[800px]">
-            <thead className="bg-gray-50 text-gray-500 text-[10px] md:text-xs font-semibold uppercase tracking-wider border-b border-gray-100">
+            <thead className="bg-emerald-50 text-gray-700 text-[10px] md:text-xs font-semibold uppercase tracking-wider border-b border-gray-100" >
               <tr>
                 <th className="px-4 md:px-6 py-3 md:py-4.5 whitespace-nowrap">User</th>
                 <th className="px-4 md:px-6 py-3 md:py-4.5 whitespace-nowrap">Profil Risiko</th>

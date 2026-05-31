@@ -1,22 +1,55 @@
+import { useState, useEffect } from 'react';
 import { Eye, Users, Zap } from 'lucide-react';
 
 const AnalyticsAdmin = () => {
-  // DATA MOCKUP TOP PERFORMING CONTENT SESUAI FIGMA
-  const analyticsData = [
-    { id: 1, title: 'Apa itu FineXa?', views: '3,200', engagement: '85%', progress: 'w-[85%]' },
-    { id: 2, title: 'Bagaimana sistem rekomendasi investasi FineXa bekerja?', views: '2,100', engagement: '78%', progress: 'w-[78%]' },
-    { id: 3, title: 'Apa saja yang dipelajari di Edukasi Investasi FineXa?', views: '1,560', engagement: '72%', progress: 'w-[72%]' },
-    { id: 4, title: 'Apa itu Profil Risiko?', views: '1,250', engagement: '68%', progress: 'w-[68%]' },
-    { id: 5, title: 'Bagaimana perlindungan data pengguna di FineXa?', views: '890', engagement: '65%', progress: 'w-[65%]' },
-    { id: 6, title: 'Bagaimana perlindungan data pengguna di FineXa?', views: '700', engagement: '70%', progress: 'w-[70%]' },
-  ];
+  // 1. STATE UNTUK DATA DINAMIS DARI API
+  const [analyticsData, setAnalyticsData] = useState([]);
+  const [stats, setStats] = useState({
+    total_views: 0,
+    active_users: 0,
+    avg_engagement: 0,
+    views_growth: 0,
+    users_growth: 0,
+    engagement_growth: 0
+  });
+  const [isLoading, setIsLoading] = useState(true);
+
+  // ==========================================
+  // AREA INTEGRASI API (Menarik Data Asli)
+  // ==========================================
+  useEffect(() => {
+    const fetchAnalytics = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await fetch('http://localhost:8000/api/analytics', {
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        const data = await response.json();
+        
+        if (data.status === 'success') {
+          setStats(data.data.stats);
+          setAnalyticsData(data.data.top_content);
+        }
+      } catch (error) {
+        console.error("Gagal mengambil data analytics:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchAnalytics();
+  }, []);
+  // ==========================================
 
   return (
     <div className="space-y-4 md:space-y-6">
       
       {/* 1. TITLE SECTION */}
       <div>
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-950 tracking-tight">Analytics</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-950 tracking-tight">Analytics 👁️👁️</h1>
         <p className="text-gray-500 text-xs md:text-sm mt-1">Insight dan performa platform FineXa</p>
       </div>
 
@@ -30,10 +63,12 @@ const AnalyticsAdmin = () => {
               <Eye className="w-4 h-4 md:w-5 md:h-5" />
             </div>
             <p className="text-[11px] md:text-xs font-semibold text-gray-400 mt-4 tracking-wide">Total FAQ Views</p>
-            <p className="text-2xl md:text-3xl font-extrabold text-gray-900 mt-1">9,700</p>
+            <p className="text-2xl md:text-3xl font-extrabold text-gray-900 mt-1">
+              {isLoading ? '...' : stats.total_views.toLocaleString('id-ID')}
+            </p>
           </div>
-          <span className="text-[10px] md:text-[11px] font-bold text-emerald-500 mt-4 flex items-center gap-1">
-            +12.5% dari minggu lalu
+          <span className={`text-[10px] md:text-[11px] font-bold mt-4 flex items-center gap-1 ${stats.views_growth >= 0 ? 'text-emerald-500' : 'text-red-500'}`}>
+            {stats.views_growth >= 0 ? '↗ +' : '↘ '}{stats.views_growth}% dari minggu lalu
           </span>
         </div>
 
@@ -43,11 +78,13 @@ const AnalyticsAdmin = () => {
             <div className="p-2 md:p-2.5 bg-blue-50 rounded-xl max-w-max text-blue-600">
               <Users className="w-4 h-4 md:w-5 md:h-5" />
             </div>
-            <p className="text-[11px] md:text-xs font-semibold text-gray-400 mt-4 tracking-wide">Active Users</p>
-            <p className="text-2xl md:text-3xl font-extrabold text-gray-900 mt-1">3,130</p>
+            <p className="text-[11px] md:text-xs font-semibold text-gray-400 mt-4 tracking-wide">Login Sessions</p>
+            <p className="text-2xl md:text-3xl font-extrabold text-gray-900 mt-1">
+              {isLoading ? '...' : stats.active_users.toLocaleString('id-ID')}
+            </p>
           </div>
-          <span className="text-[10px] md:text-[11px] font-bold text-emerald-500 mt-4 flex items-center gap-1">
-            +8.2% dari minggu lalu
+          <span className={`text-[10px] md:text-[11px] font-bold mt-4 flex items-center gap-1 ${stats.users_growth >= 0 ? 'text-emerald-500' : 'text-red-500'}`}>
+            {stats.users_growth >= 0 ? '↗ +' : '↘ '}{stats.users_growth}% dari minggu lalu
           </span>
         </div>
 
@@ -58,10 +95,12 @@ const AnalyticsAdmin = () => {
               <Zap className="w-4 h-4 md:w-5 md:h-5" />
             </div>
             <p className="text-[11px] md:text-xs font-semibold text-gray-400 mt-4 tracking-wide">Avg. Engagement</p>
-            <p className="text-2xl md:text-3xl font-extrabold text-gray-900 mt-1">73.5%</p>
+            <p className="text-2xl md:text-3xl font-extrabold text-gray-900 mt-1">
+              {isLoading ? '...' : `${stats.avg_engagement}%`}
+            </p>
           </div>
-          <span className="text-[10px] md:text-[11px] font-bold text-red-500 mt-4 flex items-center gap-1">
-            -2.3% dari minggu lalu
+          <span className={`text-[10px] md:text-[11px] font-bold mt-4 flex items-center gap-1 ${stats.engagement_growth >= 0 ? 'text-emerald-500' : 'text-red-500'}`}>
+            {stats.engagement_growth >= 0 ? '↗ +' : '↘ '}{stats.engagement_growth}% dari minggu lalu
           </span>
         </div>
 
@@ -70,14 +109,13 @@ const AnalyticsAdmin = () => {
       {/* 3. TABLE: TOP PERFORMING CONTENT */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
         <div className="px-5 md:px-6 py-4 md:py-5 border-b border-gray-100">
-          <h3 className="font-bold text-base md:text-lg text-gray-800">Top Performing Content</h3>
+          <h3 className="font-bold text-base md:text-lg text-gray-800">Top Performing Content 📈</h3>
         </div>
         
-        {/* Wrapper overflow-x-auto untuk horizontal scroll di HP */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"></div>  
         <div className="overflow-x-auto">
-          {/* min-w-[600px] memaksa tabel tetap lebar dan bisa di-scroll di layar sempit */}
           <table className="w-full text-left text-sm text-gray-600 min-w-[600px]">
-            <thead className="bg-gray-50 text-gray-400 text-[10px] md:text-xs font-bold border-b border-gray-100 uppercase tracking-wider">
+            <thead className="bg-emerald-50 text-gray-700 text-[10px] md:text-xs font-bold border-b border-gray-100 uppercase tracking-wider">
               <tr>
                 <th className="px-5 md:px-6 py-3 md:py-4 w-[50%] whitespace-nowrap">Judul</th>
                 <th className="px-5 md:px-6 py-3 md:py-4 text-center whitespace-nowrap">Views</th>
@@ -86,24 +124,37 @@ const AnalyticsAdmin = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 text-gray-700 font-medium">
-              {analyticsData.map((data) => (
-                <tr key={data.id} className="hover:bg-gray-50/40 transition">
-                  {/* Judul Konten */}
-                  <td className="px-5 md:px-6 py-3 md:py-4.5 font-bold text-gray-900 text-[11px] md:text-sm max-w-[200px] md:max-w-md truncate">
-                    {data.title}
-                  </td>
-                  {/* Views */}
-                  <td className="px-5 md:px-6 py-3 md:py-4.5 text-center text-gray-600 font-semibold text-[11px] md:text-sm">{data.views}</td>
-                  {/* Engagement */}
-                  <td className="px-5 md:px-6 py-3 md:py-4.5 text-center text-gray-600 font-semibold text-[11px] md:text-sm">{data.engagement}</td>
-                  {/* Performance Progress Bar */}
-                  <td className="px-5 md:px-6 py-3 md:py-4.5 w-32 md:w-48">
-                    <div className="w-full bg-gray-100 h-1.5 md:h-2 rounded-full overflow-hidden">
-                      <div className={`bg-emerald-500 h-full rounded-full ${data.progress}`}></div>
-                    </div>
-                  </td>
+              {isLoading ? (
+                <tr>
+                  <td colSpan="4" className="text-center py-10 text-gray-400">Memuat data analitik...</td>
                 </tr>
-              ))}
+              ) : analyticsData.length === 0 ? (
+                <tr>
+                  <td colSpan="4" className="text-center py-10 text-gray-400">Belum ada data analitik tersedia.</td>
+                </tr>
+              ) : (
+                analyticsData.map((data, index) => (
+                  <tr key={index} className="hover:bg-gray-50/40 transition">
+                    <td className="px-5 md:px-6 py-3 md:py-4.5 font-bold text-gray-900 text-[11px] md:text-sm max-w-[200px] md:max-w-md truncate">
+                      {data.title}
+                    </td>
+                    <td className="px-5 md:px-6 py-3 md:py-4.5 text-center text-gray-600 font-semibold text-[11px] md:text-sm">
+                      {data.views.toLocaleString('id-ID')}
+                    </td>
+                    <td className="px-5 md:px-6 py-3 md:py-4.5 text-center text-gray-600 font-semibold text-[11px] md:text-sm">
+                      {data.engagement}%
+                    </td>
+                    <td className="px-5 md:px-6 py-3 md:py-4.5 w-32 md:w-48">
+                      <div className="w-full bg-gray-100 h-1.5 md:h-2 rounded-full overflow-hidden">
+                        <div 
+                          className="bg-emerald-500 h-full rounded-full" 
+                          style={{ width: `${data.engagement}%` }}
+                        ></div>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

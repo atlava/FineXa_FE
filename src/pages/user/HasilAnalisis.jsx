@@ -108,7 +108,7 @@ const AdviceResult = () => {
     <div className="max-w-3xl mx-auto w-full pt-6 md:pt-10 pb-20">
       
       <div className="mb-8">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">Hasil Analisis Anda</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">Hasil Analisis Anda 🧠</h1>
         <p className="text-sm text-gray-500">Rekomendasi instrumen berdasarkan jawaban kuesioner terakhir Anda.</p>
       </div>
 

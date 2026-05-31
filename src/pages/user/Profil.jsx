@@ -93,7 +93,7 @@ const Profil = () => {
   return (
     <div className="max-w-4xl mx-auto pt-4 pb-20">
       <div className="bg-white rounded-[24px] md:rounded-[32px] shadow-sm border border-gray-100 p-6 md:p-10">
-        <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-6 border-b pb-4">Profil Saya</h2>
+        <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-6 border-b pb-4">Profil Saya 🪪</h2>
 
         {/* Tempat Menampilkan Notifikasi Sukses/Error */}
         {pesan.text && (

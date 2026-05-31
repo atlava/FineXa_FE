@@ -99,7 +99,7 @@ const Dashboard = () => {
       {/* Instrumen Investasi Section */}
       <div className="mb-12">
         <div className="mb-6">
-          <h2 className="text-2xl font-bold text-gray-800">Katalog Instrumen Investasi</h2>
+          <h2 className="text-2xl font-bold text-gray-800">Katalog Instrumen Investasi 📚</h2>
         </div>
 
         {isLoading ? (

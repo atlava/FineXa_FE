@@ -12,6 +12,7 @@ import Dashboard from './pages/user/Dashboard';
 import Kuisioner from './pages/user/Kuisioner'; 
 import HasilAnalisis from './pages/user/HasilAnalisis';
 import NotFound from './pages/NotFound'; 
+import SyaratKetentuan from './pages/auth/SyaratKetentuan';
 
 // IMPORT Admin
 import AdminLayout from './components/admin/AdminLayout';
@@ -37,6 +38,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/lupa-password" element={<LupaPassword />} />
         <Route path="/atur-ulang-password" element={<AturUlangPassword />} />
+        <Route path="/terms" element={<SyaratKetentuan />} />
 
         {/* Rute User (Dibungkus pakai UserLayout biar ada Navigasinya) */}
         <Route element={<UserLayout />}>

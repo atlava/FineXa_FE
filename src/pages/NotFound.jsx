@@ -10,9 +10,11 @@ const NotFound = () => {
     if (role === 'admin') {
       // Jika dia Admin, kembalikan ke markas Admin
       navigate('/admin-dashboard');
-    } else {
+    } else if (role === 'investor') {
       // Jika dia Investor atau belum login, kembalikan ke dashboard user
       navigate('/dashboard');
+    } else {
+      navigate('/login')
     }
   };
 
