@@ -18,7 +18,7 @@ const Profil = () => {
       try {
         const token = localStorage.getItem('token');
         // Panggil rute bawaan Laravel untuk mengambil KTP user yang sedang login
-        const response = await fetch('http://localhost:8000/api/user', {
+        const response = await fetch(import.meta.env.VITE_API_URL + '/user', {
           headers: {
             'Accept': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -57,7 +57,7 @@ const Profil = () => {
         ...(passwordBaru && { password: passwordBaru }) 
       };
 
-      const response = await fetch(`http://localhost:8000/api/users/${idUser}`, {
+      const response = await fetch(import.meta.env.VITE_API_URL + `/users/${idUser}`, {
         method: 'PUT', // Gunakan PUT untuk update data
         headers: {
           'Content-Type': 'application/json',

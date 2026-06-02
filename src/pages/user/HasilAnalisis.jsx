@@ -35,7 +35,7 @@ const AdviceResult = () => {
     const fetchAnalisis = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:8000/api/analisis', {
+        const response = await fetch(import.meta.env.VITE_API_URL + '/analisis', {
           headers: {
             'Accept': 'application/json',
             'Authorization': `Bearer ${token}`

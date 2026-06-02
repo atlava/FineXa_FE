@@ -12,7 +12,7 @@ const Dashboard = () => {
         const token = localStorage.getItem('token'); // Ambil KTP dari brankas
         
         // Tembak jalur /web/assets milikmu yang dikawal auth
-        const response = await fetch('http://localhost:8000/api/assets', {
+        const response = await fetch(import.meta.env.VITE_API_URL + '/assets', {
           headers: {
             'Accept': 'application/json', // Minta Laravel membalas dengan JSON (memicu Tahap D di controller)
             'Authorization': `Bearer ${token}` 
