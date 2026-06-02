@@ -20,8 +20,8 @@ const Login = () => {
     setIsLoading(true); // Ubah tombol jadi "Loading..."
 
     try {
-      // Nembak API Login Laravel kamu
-      const response = await fetch('http://127.0.0.1:8000/api/login', {
+      // Nembak API Login Laravel
+      const response = await fetch('https://finexabe-production.up.railway.app/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ const Login = () => {
       // Kalau sukses (Status 200 OK)
       if (response.ok) {
         // Simpan "Kunci Akses" (Token) di brankas browser (localStorage)
-        localStorage.setItem('token', data.token); // Pastikan API-mu mereturn 'token'
+        localStorage.setItem('token', data.token); // Pastikan API mereturn 'token'
         
         // Buka pintu ke Dashboard
         navigate('/dashboard');
