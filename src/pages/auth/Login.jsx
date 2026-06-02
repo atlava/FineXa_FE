@@ -39,12 +39,18 @@ const Login = () => {
       if (response.ok) {
         // Simpan "Kunci Akses" (Token) di brankas browser (localStorage)
         localStorage.setItem('token', data.token); // Pastikan API-mu mereturn 'token'
+        localStorage.setItem('role', data.role);
         
         // Buka pintu ke Dashboard
-        navigate('/dashboard');
+       if (data.role === 'admin') {
+          navigate('/admin-dashboard'); // Pastikan ini sesuai dengan rute admin di App.jsx
+        } else {
+          navigate('/dashboard');       // Rute untuk user/investor biasa
+        }
       } else {
         // Kalau gagal (Email/Password salah)
-        setErrorMsg(data.message || 'Login gagal. Periksa kembali email dan password Anda.');
+        // Menangkap data.pesan dari LoginController Laravel
+        setErrorMsg(data.pesan || 'Login gagal. Periksa kembali email dan password Anda.');
       }
     } catch (err) {
       setErrorMsg('Gagal terhubung ke server Backend. Pastikan Laravel menyala.');
