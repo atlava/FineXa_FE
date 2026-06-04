@@ -41,7 +41,7 @@ const Login = () => {
         localStorage.setItem('token', data.token); // Pastikan API mereturn 'token'
         localStorage.setItem('user', JSON.stringify(data.data));
         if (data.role === 'admin') {
-          navigate('/admin/dashboard');
+          navigate('/admin');
         } else {
           // Buka pintu ke Dashboard
         navigate('/dashboard');
