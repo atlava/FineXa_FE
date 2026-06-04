@@ -21,7 +21,7 @@ const Login = () => {
 
     try {
       // Nembak API Login Laravel
-      const response = await fetch('https://finexabe-production.up.railway.app/api/login', {
+      const response = await fetch(import.meta.env.VITE_API_URL + '/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,9 +39,14 @@ const Login = () => {
       if (response.ok) {
         // Simpan "Kunci Akses" (Token) di brankas browser (localStorage)
         localStorage.setItem('token', data.token); // Pastikan API mereturn 'token'
-        
-        // Buka pintu ke Dashboard
+        localStorage.setItem('user', JSON.stringify(data.data));
+        if (data.role === 'admin') {
+          navigate('/admin/dashboard');
+        } else {
+          // Buka pintu ke Dashboard
         navigate('/dashboard');
+        }
+        
       } else {
         // Kalau gagal (Email/Password salah)
         setErrorMsg(data.message || 'Login gagal. Periksa kembali email dan password Anda.');
