@@ -68,7 +68,7 @@ const Kuisioner = () => {
         profil_risiko: labelProfil        // Syarat 'required|string' dari Laravel
       };
 
-      const response = await fetch('http://127.0.0.1:8000/api/kuesioner', {
+      const response = await fetch(import.meta.env.VITE_API_URL + '/kuesioner', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
