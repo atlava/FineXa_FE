@@ -12,10 +12,11 @@ import Dashboard from './pages/user/Dashboard';
 import Kuisioner from './pages/user/Kuisioner'; 
 import HasilAnalisis from './pages/user/HasilAnalisis';
 import NotFound from './pages/NotFound'; 
+import SyaratKetentuan from './pages/auth/SyaratKetentuan';
 
 // IMPORT Admin
 import AdminLayout from './components/admin/AdminLayout';
-import LoginAdmin from './pages/admin/LoginAdmin';
+
 import DashboardAdmin from './pages/admin/DashboardAdmin';
 import UserManagementAdmin from './pages/admin/UserManagementAdmin';
 import FaqManagementAdmin from './pages/admin/FaqManagementAdmin';
@@ -37,6 +38,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/lupa-password" element={<LupaPassword />} />
         <Route path="/atur-ulang-password" element={<AturUlangPassword />} />
+        <Route path="/terms" element={<SyaratKetentuan />} />
 
         {/* Rute User (Dibungkus pakai UserLayout biar ada Navigasinya) */}
         <Route element={<UserLayout />}>
@@ -49,11 +51,9 @@ function App() {
 
 
       
-        {/* RUTE ADMIN */}
-        <Route path="/admin/login" element={<LoginAdmin />} />
 
         {/* Rute Dashboard Khusus Admin */}
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route path="/admin-dashboard" element={<AdminLayout />}>
           <Route index element={<DashboardAdmin />} />
           <Route path="user-management" element={<UserManagementAdmin />} />
           <Route path="faq-management" element={<FaqManagementAdmin />} />
@@ -67,4 +67,4 @@ function App() {
   );
 }
 
-export default App;
+export default App;   

@@ -49,7 +49,8 @@ const Login = () => {
         
       } else {
         // Kalau gagal (Email/Password salah)
-        setErrorMsg(data.message || 'Login gagal. Periksa kembali email dan password Anda.');
+        // Menangkap data.pesan dari LoginController Laravel
+        setErrorMsg(data.pesan || 'Login gagal. Periksa kembali email dan password Anda.');
       }
     } catch (err) {
       setErrorMsg('Gagal terhubung ke server Backend. Pastikan Laravel menyala.');

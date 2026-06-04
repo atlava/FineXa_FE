@@ -32,12 +32,42 @@ const FAQ = () => {
     fetchFaq();
   }, []);
 
+  // SARINGAN: Hanya ambil yang statusnya 'published'
+  const faqYangBolehTampil = faqData.filter(faq => faq.status === 'published');
+
+
+  // FUNGSI SENSOR: Lapor ke Backend setiap kali FAQ diklik
+  const handleToggleFaq = async (index, faqId) => {
+    // Jika accordion ditutup (klik pertanyaan yang sama), maka tutup saja
+    if (activeIndex === index) {
+      setActiveIndex(null);
+      return;
+    }
+
+    // Jika accordion dibuka, buka dulu layarnya biar user nggak nunggu
+    setActiveIndex(index);
+
+    // Lalu diam-diam kirim sinyal 'Views' ke API Laravel di belakang layar
+    try {
+      const token = localStorage.getItem('token');
+      await fetch(`http://localhost:8000/api/faqs/${faqId}/track`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+    } catch (error) {
+      console.error("Gagal merekam jejak klik FAQ", error);
+    }
+  };
+
   return (
     <div className="max-w-3xl mx-auto pt-4 md:pt-8 pb-10">
       
       {/* Header Teks */}
       <div className="text-center mb-8 md:mb-10">
-        <h1 className="text-2xl md:text-4xl font-bold text-gray-800 mb-3">Frequently Asked Questions</h1>
+        <h1 className="text-2xl md:text-4xl font-bold text-gray-800 mb-3">Frequently Asked Questions 🙋‍♂️💬</h1>
         <p className="text-gray-500 font-light text-sm md:text-base px-4">
           Ada pertanyaan seputar FineXa? Temukan jawabannya di bawah ini.
         </p>
@@ -48,20 +78,22 @@ const FAQ = () => {
         <div className="flex justify-center items-center py-10">
           <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-[#51BA55]"></div>
         </div>
-      ) : faqData.length === 0 ? (
+      ) : faqYangBolehTampil.length === 0 ? (
+        /* Menggunakan faqYangBolehTampil untuk mengecek kekosongan data */
         <div className="text-center text-gray-500 py-10">
-          Belum ada data FAQ di database.
+          Belum ada data FAQ yang dipublikasikan saat ini.
         </div>
       ) : (
         /* List Accordion FAQ */
         <div className="flex flex-col gap-3 md:gap-4">
-          {faqData.map((item, index) => (
+          {/* Menggunakan faqYangBolehTampil untuk di-looping */}
+          {faqYangBolehTampil.map((item, index) => (
             <div 
-              key={item.id || index} 
+              key={item.id_faq || index} 
               className="bg-white rounded-[16px] md:rounded-[20px] shadow-sm border border-gray-100 overflow-hidden transition-all duration-300"
             >
               <button 
-                onClick={() => setActiveIndex(activeIndex === index ? null : index)}
+                onClick={() => handleToggleFaq(index, item.id_faq || item.id)}
                 className="w-full text-left px-5 md:px-6 py-4 md:py-5 flex justify-between items-center focus:outline-none hover:bg-gray-50 transition-colors"
               >
                 {/* AMBIL DARI KOLOM pertanyaan */}

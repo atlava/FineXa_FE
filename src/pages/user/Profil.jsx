@@ -93,7 +93,7 @@ const Profil = () => {
   return (
     <div className="max-w-4xl mx-auto pt-4 pb-20">
       <div className="bg-white rounded-[24px] md:rounded-[32px] shadow-sm border border-gray-100 p-6 md:p-10">
-        <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-6 border-b pb-4">Profil Saya</h2>
+        <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-6 border-b pb-4">Profil Saya 🪪</h2>
 
         {/* Tempat Menampilkan Notifikasi Sukses/Error */}
         {pesan.text && (
@@ -107,11 +107,7 @@ const Profil = () => {
           {/* Bagian Kiri: Foto Profil (Statis Dulu Sesuai Rencana) */}
           <div className="flex flex-col items-center md:w-1/3">
             <div className="w-28 h-28 md:w-32 md:h-32 bg-gray-100 rounded-full flex items-center justify-center text-4xl md:text-5xl mb-4 overflow-hidden shadow-inner border-4 border-white ring-1 ring-gray-100">
-              👤
-            </div>
-            <button type="button" className="text-xs md:text-sm font-semibold text-gray-400 border-2 border-gray-200 px-5 py-2 rounded-xl cursor-not-allowed">
-              Ubah Foto (Segera Hadir)
-            </button>
+              👤</div>
           </div>
 
           {/* Bagian Kanan: Form Data Diri */}
