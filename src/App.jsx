@@ -53,7 +53,7 @@ function App() {
       
 
         {/* Rute Dashboard Khusus Admin */}
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route path="/admin-dashboard" element={<AdminLayout />}>
           <Route index element={<DashboardAdmin />} />
           <Route path="user-management" element={<UserManagementAdmin />} />
           <Route path="faq-management" element={<FaqManagementAdmin />} />
