@@ -21,7 +21,7 @@ const AnalyticsAdmin = () => {
     const fetchAnalytics = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:8000/api/analytics', {
+        const response = await fetch(import.meta.env.VITE_API_URL + '/analytics', {
           headers: {
             'Accept': 'application/json',
             'Authorization': `Bearer ${token}`

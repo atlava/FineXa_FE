@@ -50,7 +50,7 @@ const FAQ = () => {
     // Lalu diam-diam kirim sinyal 'Views' ke API Laravel di belakang layar
     try {
       const token = localStorage.getItem('token');
-      await fetch(`http://localhost:8000/api/faqs/${faqId}/track`, {
+      await fetch(import.meta.env.VITE_API_URL + `/faqs/${faqId}/track`, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',

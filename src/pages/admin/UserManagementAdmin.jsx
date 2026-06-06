@@ -18,7 +18,7 @@ const UserManagementAdmin = () => {
     setIsLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8000/api/users', {
+      const response = await fetch(import.meta.env.VITE_API_URL + '/users', {
         headers: {
           'Accept': 'application/json',
           'Authorization': `Bearer ${token}`
@@ -53,7 +53,7 @@ const UserManagementAdmin = () => {
       const token = localStorage.getItem('token'); // Ambil kunci
       
       // Kirim perintah DELETE ke API Laravel beserta ID User-nya
-      const response = await fetch(`http://localhost:8000/api/users/${deleteUserTarget.id_user}`, {
+      const response = await fetch(import.meta.env.VITE_API_URL + `/users/${deleteUserTarget.id_user}`, {
         method: 'DELETE',
         headers: {
           'Accept': 'application/json',

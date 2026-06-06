@@ -24,7 +24,7 @@ const AdminLayout = () => {
       
       // 1. Telpon Dapur Laravel untuk menghancurkan Token di server (Jika token masih ada)
       if (token) {
-        await fetch('http://localhost:8000/api/logout', {
+        await fetch(import.meta.env.VITE_API_URL + '/logout', {
           method: 'POST', 
           headers: {
             'Accept': 'application/json',

@@ -24,7 +24,7 @@ const DashboardAdmin = () => {
     const fetchUsers = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:8000/api/users', {
+        const response = await fetch(import.meta.env.VITE_API_URL + '/users', {
           headers: {
             'Accept': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -43,7 +43,7 @@ const DashboardAdmin = () => {
     const fetchStats = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:8000/api/dashboard-stats', {
+        const response = await fetch(import.meta.env.VITE_API_URL + '/dashboard-stats', {
           headers: {
             'Accept': 'application/json',
             'Authorization': `Bearer ${token}` 

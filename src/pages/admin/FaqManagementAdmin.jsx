@@ -28,7 +28,7 @@ const FaqManagementAdmin = () => {
     setIsLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8000/api/faqs', {
+      const response = await fetch(import.meta.env.VITE_API_URL + '/faqs', {
         headers: {
           'Accept': 'application/json',
           'Authorization': `Bearer ${token}`
@@ -65,7 +65,7 @@ const FaqManagementAdmin = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8000/api/faqs/${faqId}`, {
+      const response = await fetch(import.meta.env.VITE_API_URL + `/faqs/${faqId}`, {
         method: 'PUT', // Gunakan PUT untuk mengupdate data
         headers: {
           'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ const FaqManagementAdmin = () => {
       const token = localStorage.getItem('token');
       const faqId = deleteFaqTarget.id_faq || deleteFaqTarget.id;
       
-      const response = await fetch(`http://localhost:8000/api/faqs/${faqId}`, {
+      const response = await fetch(import.meta.env.VITE_API_URL + `/faqs/${faqId}`, {
         method: 'DELETE',
         headers: {
           'Accept': 'application/json',
@@ -125,7 +125,7 @@ const FaqManagementAdmin = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8000/api/faqs', {
+      const response = await fetch(import.meta.env.VITE_API_URL + '/faqs', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
